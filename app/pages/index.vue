@@ -22,6 +22,10 @@ function onSubmit() {
 
 const quickChats = [
   {
+    label: 'What is the weather in London?',
+    icon: 'i-lucide-sun'
+  },
+  {
     label: 'Why use Nuxt UI Pro?',
     icon: 'i-logos-nuxt-icon'
   },
@@ -51,10 +55,13 @@ const quickChats = [
     </template>
 
     <template #body>
-      <UContainer class="flex-1 flex flex-col justify-center gap-4 sm:gap-6 py-8">
-        <h1 class="text-3xl sm:text-4xl text-highlighted font-bold">
-          How can I help you today?
-        </h1>
+      <UContainer class="flex-1 flex flex-col justify-center items-center gap-4 sm:gap-6 py-8">
+        <div class="flex flex-col items-center gap-2">
+          <UIcon name="i-lucide-sparkles" class="size-12 text-highlighted" />
+          <h1 class="text-3xl sm:text-4xl text-highlighted font-bold">
+            How can I help you today?
+          </h1>
+        </div>
 
         <UChatPrompt
           v-model="input"
@@ -70,7 +77,7 @@ const quickChats = [
           </template>
         </UChatPrompt>
 
-        <div class="flex flex-wrap gap-2">
+        <div class="flex flex-wrap gap-2 justify-center">
           <UButton
             v-for="quickChat in quickChats"
             :key="quickChat.label"

@@ -111,6 +111,9 @@ function getMessageContent(message: UIMessage & { content?: string }) {
           :assistant="{ actions: [{ label: 'Copy', icon: copied ? 'i-lucide-copy-check' : 'i-lucide-copy', onClick: copy }] }"
           class="lg:pt-(--ui-header-height) pb-4 sm:pb-6"
           :spacing-offset="160"
+          :ui="{
+            indicator: 'h-auto *:size-auto *:bg-transparent [&>*:nth-child(1)]:animate-none [&>*:nth-child(2)]:animate-none [&>*:nth-child(3)]:animate-none'
+          }"
         >
           <template #content="{ message }">
             <template v-for="part in message.parts as UIMessage['parts']" :key="part.type">
@@ -126,6 +129,9 @@ function getMessageContent(message: UIMessage & { content?: string }) {
               :components="components"
               :parser-options="{ highlight: false }"
             />
+          </template>
+          <template #indicator>
+            <TextBloom label="Thinking..." />
           </template>
         </UChatMessages>
 

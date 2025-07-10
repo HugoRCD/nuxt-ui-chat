@@ -4,7 +4,7 @@ import { LazyModalConfirm } from '#components'
 const route = useRoute()
 const toast = useToast()
 const overlay = useOverlay()
-const { loggedIn, openInPopup } = useUserSession()
+const { loggedIn } = useUserSession()
 
 const open = ref(false)
 
@@ -42,17 +42,17 @@ watch(loggedIn, () => {
 
 const { groups } = useChats(chats)
 
-const items = computed(() => groups.value?.flatMap((group) => {
-  return [{
-    label: group.label,
-    type: 'label' as const
-  }, ...group.items.map(item => ({
-    ...item,
-    slot: 'chat' as const,
-    icon: undefined,
-    class: item.label === 'Untitled' ? 'text-muted' : ''
-  }))]
-}))
+const modalUi = {
+  overlay: 'bg-default/30 backdrop-blur-sm',
+  content: 'max-w-2xl h-100 flex flex-col shadow-raycast'
+}
+
+const commandPaletteUi = {
+  root: 'flex flex-col h-full',
+  label: 'text-muted font-medium',
+  item: 'data-highlighted:not-data-disabled:before:bg-muted',
+  content: 'flex-1 overflow-y-auto'
+}
 
 async function deleteChat(id: string) {
   const instance = deleteModal.open()
@@ -75,16 +75,36 @@ async function deleteChat(id: string) {
     navigateTo('/')
   }
 }
-
-defineShortcuts({
-  c: () => {
-    navigateTo('/')
-  }
-})
 </script>
 
 <template>
-  <UDashboardGroup unit="rem">
-    <slot />
-  </UDashboardGroup>
+  <UModal
+    v-model:open="open"
+    :ui="modalUi"
+  >
+    <UTooltip text="Search Chats">
+      <UButton icon="i-lucide-text-search" variant="ghost" />
+    </UTooltip>
+    <template #content>
+      <UCommandPalette
+        :groups
+        :ui="commandPaletteUi"
+        :fuse="{ resultLimit: 100, fuseOptions: { includeMatches: true } }"
+      >
+        <template #item-trailing="{ item }">
+          <div class="flex">
+            <UButton
+              icon="i-lucide-x"
+              color="neutral"
+              variant="ghost"
+              size="xs"
+              class="text-muted hover:text-primary hover:bg-accented/50 focus-visible:bg-accented/50 p-0.5"
+              tabindex="-1"
+              @click.stop.prevent="deleteChat((item as any).id)"
+            />
+          </div>
+        </template>
+      </UCommandPalette>
+    </template>
+  </UModal>
 </template>

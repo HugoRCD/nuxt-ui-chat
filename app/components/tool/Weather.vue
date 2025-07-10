@@ -39,7 +39,7 @@ function getWeatherIcon(condition?: string): string {
 </script>
 
 <template>
-  <div class="w-[550px] bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl px-6 py-4 text-highlighted shadow-lg">
+  <div class="w-[550px] bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl px-6 py-4 text-highlighted shadow dark:shadow-lg">
     <div class="flex items-start justify-between mb-6">
       <div class="flex items-baseline gap-1">
         <span class="text-6xl font-light">{{ Math.round(output?.temperature || 24) }}°</span>
