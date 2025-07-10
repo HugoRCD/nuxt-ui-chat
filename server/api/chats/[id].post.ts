@@ -1,7 +1,8 @@
-import { streamText, generateText, convertToModelMessages, tool } from 'ai'
+import { streamText, generateText, convertToModelMessages } from 'ai'
 import { gateway } from '@ai-sdk/gateway'
 import type { UIMessage } from 'ai'
 import { z } from 'zod'
+import { weatherTool } from '~~/server/utils/tools/wheater'
 
 defineRouteMeta({
   openAPI: {
@@ -44,7 +45,7 @@ export default defineEventHandler(async (event) => {
         - Do not use markdown, just plain text`
       }, {
         role: 'user',
-        content: chat.messages[0]!.content
+        content: chat.messages[0]!.content || ''
       }]
     })
     setHeader(event, 'X-Chat-Title', title.replace(/:/g, '').split('\n')[0])
@@ -56,12 +57,7 @@ export default defineEventHandler(async (event) => {
     await db.insert(tables.messages).values({
       chatId: id as string,
       role: 'user',
-      content: lastMessage.parts.map((part) => {
-        if (part.type === 'text') {
-          return part.text
-        }
-        return part.type
-      }).join('')
+      parts: lastMessage.parts
     })
   }
 
@@ -74,20 +70,11 @@ export default defineEventHandler(async (event) => {
       await db.insert(tables.messages).values({
         chatId: chat.id,
         role: 'assistant',
-        content: response.text
+        parts: response.content
       })
     },
     tools: {
-      weather: tool({
-        description: 'Get the weather in a location',
-        inputSchema: z.object({
-          location: z.string().describe('The location to get the weather for')
-        }),
-        execute: async ({ location }) => ({
-          location,
-          temperature: 72 + Math.floor(Math.random() * 21) - 10
-        })
-      })
+      weather: weatherTool
     }
   })
 

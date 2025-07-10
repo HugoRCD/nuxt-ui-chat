@@ -8,6 +8,20 @@
       "when": 1752147759730,
       "tag": "0000_mixed_sauron",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1752160838272,
+      "tag": "0001_funny_lucky_pierre",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1752168255825,
+      "tag": "0002_aspiring_the_fallen",
+      "breakpoints": true
     }
   ]
 }

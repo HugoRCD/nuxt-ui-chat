@@ -1,4 +1,4 @@
-import { pgTable, varchar, pgEnum, timestamp, index, uniqueIndex } from 'drizzle-orm/pg-core'
+import { pgTable, varchar, pgEnum, timestamp, index, uniqueIndex, json, text } from 'drizzle-orm/pg-core'
 import { relations } from 'drizzle-orm'
 
 const timestamps = {
@@ -46,7 +46,9 @@ export const messages = pgTable('messages', {
   id: varchar({ length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
   chatId: varchar({ length: 36 }).notNull().references(() => chats.id, { onDelete: 'cascade' }),
   role: roleEnum().notNull(),
-  content: varchar({ length: 10000 }).notNull(),
+  content: text(),
+  parts: json(),
+  attachments: json().notNull().default('[]'),
   ...timestamps
 }, table => [
   index('messages_chat_id_idx').on(table.chatId)
@@ -58,3 +60,8 @@ export const messagesRelations = relations(messages, ({ one }) => ({
     references: [chats.id]
   })
 }))
+
+// Types
+export type User = typeof users.$inferSelect
+export type Chat = typeof chats.$inferSelect
+export type Message = typeof messages.$inferSelect

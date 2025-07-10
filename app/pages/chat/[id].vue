@@ -21,13 +21,31 @@ const { data } = await useFetch(`/api/chats/${route.params.id}`, {
 if (!data.value) {
   throw createError({ statusCode: 404, statusMessage: 'Chat not found', fatal: true })
 }
+console.log('data', data.value)
+
 const chat = new Chat({
   id: data.value.id,
-  messages: data.value.messages.map(message => ({
-    id: message.id,
-    parts: [{ type: 'text', text: message.content }],
-    role: message.role
-  })),
+  messages: data.value.messages.map((message) => {
+    if (message.content) {
+      return {
+        id: message.id,
+        parts: [{ type: 'text', text: message.content }],
+        role: message.role
+      }
+    }
+    if (message.parts) {
+      return {
+        id: message.id,
+        parts: message.parts,
+        role: message.role
+      }
+    }
+    return {
+      id: message.id,
+      parts: [{ type: 'text', text: 'Empty message' }],
+      role: message.role
+    }
+  }),
   transport: new DefaultChatTransport({
     api: `/api/chats/${data.value.id}`,
     body: {
@@ -68,7 +86,8 @@ const handleSubmit = (e: Event) => {
   input.value = ''
 }
 
-function getMessageContent(message: UIMessage) {
+function getMessageContent(message: UIMessage & { content?: string }) {
+  if (message.content) return message.content
   const parts = message.parts?.map((part) => {
     if (part.type === 'text') {
       return part.text
@@ -87,7 +106,7 @@ function getMessageContent(message: UIMessage) {
     <template #body>
       <UContainer class="flex-1 flex flex-col gap-4 sm:gap-6">
         <UChatMessages
-          :messages="chat.messages"
+          :messages="chat.messages as any"
           :status="chat.status"
           :assistant="{ actions: [{ label: 'Copy', icon: copied ? 'i-lucide-copy-check' : 'i-lucide-copy', onClick: copy }] }"
           class="lg:pt-(--ui-header-height) pb-4 sm:pb-6"
@@ -95,12 +114,10 @@ function getMessageContent(message: UIMessage) {
         >
           <template #content="{ message }">
             <template v-for="part in message.parts as UIMessage['parts']" :key="part.type">
-              <template v-if="part.type === 'tool-weather'">
-                <div class="flex flex-col items-center p-4 bg-muted rounded-md">
-                  <span class="text-lg font-medium">{{ part.output?.location }}</span>
-                  <span class="text-3xl font-bold">{{ part.output?.temperature }}°F</span>
-                </div>
-              </template>
+              <ToolWeather
+                v-if="part.type === 'tool-weather' || (part.toolName === 'weather' && (part as any).type === 'tool-result')"
+                :output="(part as any).output"
+              />
             </template>
             <MDCCached
               :value="getMessageContent(message as UIMessage)"
