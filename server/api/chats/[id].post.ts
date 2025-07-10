@@ -1,6 +1,7 @@
-import { streamText, generateText, convertToModelMessages } from 'ai'
+import { streamText, generateText, convertToModelMessages, tool } from 'ai'
 import { gateway } from '@ai-sdk/gateway'
 import type { UIMessage } from 'ai'
+import { z } from 'zod'
 
 defineRouteMeta({
   openAPI: {
@@ -13,8 +14,10 @@ export default defineEventHandler(async (event) => {
   const session = await getUserSession(event)
 
   const { id } = getRouterParams(event)
-  // TODO: Use readValidatedBody
-  const { model, messages } = await readBody(event) as { model: string, messages: UIMessage[] }
+  const { model, messages } = await readValidatedBody(event, z.object({
+    model: z.string(),
+    messages: z.array(z.custom<UIMessage>())
+  }).parse)
 
   const db = useDrizzle()
 
@@ -67,10 +70,23 @@ export default defineEventHandler(async (event) => {
     system: 'You are a helpful assistant that can answer questions and help.',
     messages: convertToModelMessages(messages),
     async onFinish(response) {
+      console.log('response', response)
       await db.insert(tables.messages).values({
         chatId: chat.id,
         role: 'assistant',
         content: response.text
+      })
+    },
+    tools: {
+      weather: tool({
+        description: 'Get the weather in a location',
+        inputSchema: z.object({
+          location: z.string().describe('The location to get the weather for')
+        }),
+        execute: async ({ location }) => ({
+          location,
+          temperature: 72 + Math.floor(Math.random() * 21) - 10
+        })
       })
     }
   })

@@ -33,7 +33,10 @@ const chat = new Chat({
     body: {
       model: model.value
     }
-  })
+  }),
+  onFinish() {
+    refreshNuxtData('chats')
+  }
 })
 
 const copied = ref(false)
@@ -70,7 +73,6 @@ function getMessageContent(message: UIMessage) {
     if (part.type === 'text') {
       return part.text
     }
-    return part.type
   })
   return parts?.join('')
 }
@@ -92,6 +94,14 @@ function getMessageContent(message: UIMessage) {
           :spacing-offset="160"
         >
           <template #content="{ message }">
+            <template v-for="part in message.parts as UIMessage['parts']" :key="part.type">
+              <template v-if="part.type === 'tool-weather'">
+                <div class="flex flex-col items-center p-4 bg-muted rounded-md">
+                  <span class="text-lg font-medium">{{ part.output?.location }}</span>
+                  <span class="text-3xl font-bold">{{ part.output?.temperature }}°F</span>
+                </div>
+              </template>
+            </template>
             <MDCCached
               :value="getMessageContent(message as UIMessage)"
               :cache-key="message.id"
