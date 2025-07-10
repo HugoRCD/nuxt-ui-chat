@@ -49,7 +49,7 @@ const chat = new Chat({
   transport: new DefaultChatTransport({
     api: `/api/chats/${data.value.id}`,
     body: {
-      model: model.value
+      model: model.value.value
     }
   }),
   onFinish() {
@@ -133,7 +133,7 @@ function getMessageContent(message: UIMessage & { content?: string }) {
           v-model="input"
           :error="chat.error"
           variant="subtle"
-          class="sticky bottom-0 [view-transition-name:chat-prompt] rounded-b-none z-10"
+          class="sticky bottom-4 [view-transition-name:chat-prompt] z-10"
           @submit="handleSubmit"
         >
           <UChatPromptSubmit

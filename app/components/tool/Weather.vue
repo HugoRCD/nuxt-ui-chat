@@ -39,35 +39,32 @@ function getWeatherIcon(condition?: string): string {
 </script>
 
 <template>
-  <div class="sm:w-[550px] mx-auto bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl p-6 text-white">
-    <div class="flex items-center justify-between mb-4">
-      <div>
-        <div class="flex items-center">
-          <span class="text-5xl font-light mr-2">{{ Math.round(output?.temperature || 24) }}°</span>
-          <span class="text-xl">C</span>
+  <div class="w-[550px] bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl px-6 py-4 text-highlighted shadow-lg">
+    <div class="flex items-start justify-between mb-6">
+      <div class="flex items-baseline gap-1">
+        <span class="text-6xl font-light">{{ Math.round(output?.temperature || 24) }}°</span>
+        <span class="text-lg text-highlighted mt-2">C</span>
+      </div>
+      <div class="text-right">
+        <div class="text-lg font-medium mb-1">
+          {{ output?.location || 'Nice' }}
         </div>
-        <div class="text-blue-100 mt-1">
-          H:{{ output?.temperatureHigh || 26 }}° L:{{ output?.temperatureLow || 21 }}°
+        <div class="text-sm text-highlighted">
+          H:{{ output?.temperatureHigh || 30 }}° L:{{ output?.temperatureLow || 25 }}°
         </div>
       </div>
-      <div class="text-6xl">
-        {{ getWeatherIcon(output?.condition) }}
-      </div>
-    </div>
-    <div class="mb-6 text-xl font-medium text-highlighted">
-      {{ output?.location }}
     </div>
 
-    <div class="grid grid-cols-6 gap-3 text-center">
+    <div class="flex items-center justify-between">
       <div
         v-for="(forecast, index) in hourlyForecasts"
         :key="index"
-        class="flex flex-col items-center"
+        class="flex flex-col items-center gap-2"
       >
-        <div class="text-xs text-blue-100 mb-1">
+        <div class="text-xs text-highlighted font-medium">
           {{ forecast.time }}
         </div>
-        <div class="text-2xl mb-1">
+        <div class="text-3xl">
           {{ forecast.icon }}
         </div>
         <div class="text-sm font-medium">
