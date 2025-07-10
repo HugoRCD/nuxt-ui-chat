@@ -7,13 +7,13 @@ export default defineEventHandler(async (event) => {
   const chat = await db.insert(tables.chats).values({
     title: '',
     userId: session.user?.id || session.id
-  }).returning().get()
+  }).returning()
 
   await db.insert(tables.messages).values({
-    chatId: chat.id,
+    chatId: chat[0]?.id || '',
     role: 'user',
     content: input
   })
 
-  return chat
+  return chat[0]
 })

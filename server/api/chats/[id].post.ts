@@ -1,4 +1,6 @@
-import { streamText } from 'ai'
+import { streamText, generateText, convertToModelMessages } from 'ai'
+import { gateway } from '@ai-sdk/gateway'
+import type { UIMessage } from 'ai'
 
 defineRouteMeta({
   openAPI: {
@@ -12,17 +14,9 @@ export default defineEventHandler(async (event) => {
 
   const { id } = getRouterParams(event)
   // TODO: Use readValidatedBody
-  const { model, messages } = await readBody(event)
+  const { model, messages } = await readBody(event) as { model: string, messages: UIMessage[] }
 
   const db = useDrizzle()
-  // Enable AI Gateway if defined in environment variables
-  const gateway = process.env.CLOUDFLARE_AI_GATEWAY_ID
-    ? {
-        id: process.env.CLOUDFLARE_AI_GATEWAY_ID,
-        cacheTtl: 60 * 60 * 24 // 24 hours
-      }
-    : undefined
-  const workersAI = createWorkersAI({ binding: hubAI(), gateway })
 
   const chat = await db.query.chats.findFirst({
     where: (chat, { eq }) => and(eq(chat.id, id as string), eq(chat.userId, session.user?.id || session.id)),
@@ -35,9 +29,8 @@ export default defineEventHandler(async (event) => {
   }
 
   if (!chat.title) {
-    // @ts-expect-error - response is not typed
-    const { response: title } = await hubAI().run('@cf/meta/llama-3.1-8b-instruct-fast', {
-      stream: false,
+    const { text: title } = await generateText({
+      model: gateway('openai/gpt-4.1-nano'),
       messages: [{
         role: 'system',
         content: `You are a title generator for a chat:
@@ -50,27 +43,29 @@ export default defineEventHandler(async (event) => {
         role: 'user',
         content: chat.messages[0]!.content
       }]
-    }, {
-      gateway
     })
     setHeader(event, 'X-Chat-Title', title.replace(/:/g, '').split('\n')[0])
     await db.update(tables.chats).set({ title }).where(eq(tables.chats.id, id as string))
   }
 
   const lastMessage = messages[messages.length - 1]
-  if (lastMessage.role === 'user' && messages.length > 1) {
+  if (lastMessage?.role === 'user' && messages.length > 1) {
     await db.insert(tables.messages).values({
       chatId: id as string,
       role: 'user',
-      content: lastMessage.content
+      content: lastMessage.parts.map((part) => {
+        if (part.type === 'text') {
+          return part.text
+        }
+        return part.type
+      }).join('')
     })
   }
 
-  return streamText({
-    model: workersAI(model),
-    maxTokens: 10000,
+  const result = streamText({
+    model: gateway(model),
     system: 'You are a helpful assistant that can answer questions and help.',
-    messages,
+    messages: convertToModelMessages(messages),
     async onFinish(response) {
       await db.insert(tables.messages).values({
         chatId: chat.id,
@@ -78,5 +73,7 @@ export default defineEventHandler(async (event) => {
         content: response.text
       })
     }
-  }).toDataStreamResponse()
+  })
+
+  return result.toUIMessageStreamResponse()
 })

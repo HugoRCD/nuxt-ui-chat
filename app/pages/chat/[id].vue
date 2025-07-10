@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { DefineComponent } from 'vue'
-import { useChat, type Message } from '@ai-sdk/vue'
+import { Chat } from '@ai-sdk/vue'
+import { DefaultChatTransport } from 'ai'
+import type { UIMessage } from 'ai'
 import { useClipboard } from '@vueuse/core'
 import ProseStreamPre from '../../components/prose/PreStream.vue'
 
@@ -9,48 +11,40 @@ const components = {
 }
 
 const route = useRoute()
-const toast = useToast()
 const clipboard = useClipboard()
 const { model } = useLLM()
+const input = ref('')
 
-const { data: chat } = await useFetch(`/api/chats/${route.params.id}`, {
+const { data } = await useFetch(`/api/chats/${route.params.id}`, {
   cache: 'force-cache'
 })
-if (!chat.value) {
+if (!data.value) {
   throw createError({ statusCode: 404, statusMessage: 'Chat not found', fatal: true })
 }
-
-const { messages, input, handleSubmit, reload, stop, status, error } = useChat({
-  id: chat.value.id,
-  api: `/api/chats/${chat.value.id}`,
-  initialMessages: chat.value.messages.map(message => ({
+const chat = new Chat({
+  id: data.value.id,
+  messages: data.value.messages.map(message => ({
     id: message.id,
-    content: message.content,
+    parts: [{ type: 'text', text: message.content }],
     role: message.role
   })),
-  body: {
-    model: model.value
-  },
-  onResponse(response) {
-    if (response.headers.get('X-Chat-Title')) {
-      refreshNuxtData('chats')
+  transport: new DefaultChatTransport({
+    api: `/api/chats/${data.value.id}`,
+    body: {
+      model: model.value
     }
-  },
-  onError(error) {
-    const { message } = typeof error.message === 'string' && error.message[0] === '{' ? JSON.parse(error.message) : error
-    toast.add({
-      description: message,
-      icon: 'i-lucide-alert-circle',
-      color: 'error',
-      duration: 0
-    })
-  }
+  })
 })
 
 const copied = ref(false)
 
-function copy(e: MouseEvent, message: Message) {
-  clipboard.copy(message.content)
+function copy(e: MouseEvent, message: UIMessage) {
+  clipboard.copy(message.parts?.map((part) => {
+    if (part.type === 'text') {
+      return part.text
+    }
+    return part.type
+  }).join(''))
 
   copied.value = true
 
@@ -60,10 +54,26 @@ function copy(e: MouseEvent, message: Message) {
 }
 
 onMounted(() => {
-  if (chat.value?.messages.length === 1) {
-    reload()
+  if (data.value?.messages.length === 1) {
+    chat.regenerate()
   }
 })
+
+const handleSubmit = (e: Event) => {
+  e.preventDefault()
+  chat.sendMessage({ text: input.value })
+  input.value = ''
+}
+
+function getMessageContent(message: UIMessage) {
+  const parts = message.parts?.map((part) => {
+    if (part.type === 'text') {
+      return part.text
+    }
+    return part.type
+  })
+  return parts?.join('')
+}
 </script>
 
 <template>
@@ -75,15 +85,15 @@ onMounted(() => {
     <template #body>
       <UContainer class="flex-1 flex flex-col gap-4 sm:gap-6">
         <UChatMessages
-          :messages="messages"
-          :status="status"
+          :messages="chat.messages"
+          :status="chat.status"
           :assistant="{ actions: [{ label: 'Copy', icon: copied ? 'i-lucide-copy-check' : 'i-lucide-copy', onClick: copy }] }"
           class="lg:pt-(--ui-header-height) pb-4 sm:pb-6"
           :spacing-offset="160"
         >
           <template #content="{ message }">
             <MDCCached
-              :value="message.content"
+              :value="getMessageContent(message as UIMessage)"
               :cache-key="message.id"
               unwrap="p"
               :components="components"
@@ -94,16 +104,16 @@ onMounted(() => {
 
         <UChatPrompt
           v-model="input"
-          :error="error"
+          :error="chat.error"
           variant="subtle"
           class="sticky bottom-0 [view-transition-name:chat-prompt] rounded-b-none z-10"
           @submit="handleSubmit"
         >
           <UChatPromptSubmit
-            :status="status"
+            :status="chat.status"
             color="neutral"
-            @stop="stop"
-            @reload="reload"
+            @stop="chat.stop"
+            @reload="chat.regenerate"
           />
 
           <template #footer>

@@ -2,7 +2,7 @@ import { pgTable, varchar, pgEnum, timestamp, index, uniqueIndex } from 'drizzle
 import { relations } from 'drizzle-orm'
 
 const timestamps = {
-  createdAt: timestamp().defaultNow().notNull(),
+  createdAt: timestamp().defaultNow().notNull()
 }
 
 export const providerEnum = pgEnum('provider', ['github'])
@@ -16,8 +16,8 @@ export const users = pgTable('users', {
   username: varchar({ length: 50 }).notNull(),
   provider: providerEnum().notNull(),
   providerId: varchar({ length: 50 }).notNull(),
-  ...timestamps,
-}, (table) => [
+  ...timestamps
+}, table => [
   uniqueIndex('users_provider_id_idx').on(table.provider, table.providerId)
 ])
 
@@ -29,8 +29,8 @@ export const chats = pgTable('chats', {
   id: varchar({ length: 36 }).primaryKey().$defaultFn(() => crypto.randomUUID()),
   title: varchar({ length: 200 }),
   userId: varchar({ length: 36 }).notNull().references(() => users.id, { onDelete: 'cascade' }),
-  ...timestamps,
-}, (table) => [
+  ...timestamps
+}, table => [
   index('chats_user_id_idx').on(table.userId)
 ])
 
@@ -47,8 +47,8 @@ export const messages = pgTable('messages', {
   chatId: varchar({ length: 36 }).notNull().references(() => chats.id, { onDelete: 'cascade' }),
   role: roleEnum().notNull(),
   content: varchar({ length: 10000 }).notNull(),
-  ...timestamps,
-}, (table) => [
+  ...timestamps
+}, table => [
   index('messages_chat_id_idx').on(table.chatId)
 ])
 
