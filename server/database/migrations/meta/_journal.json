@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1744299418910,
+      "tag": "0000_moaning_mastermind",
+      "breakpoints": true
+    }
+  ]
+}
