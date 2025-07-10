@@ -1,5 +1,4 @@
 import { streamText } from 'ai'
-import { createWorkersAI } from 'workers-ai-provider'
 
 defineRouteMeta({
   openAPI: {
