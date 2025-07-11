@@ -40,7 +40,22 @@ watch(loggedIn, () => {
   open.value = false
 })
 
-const { groups } = useChats(chats)
+const { groups: chatsGroups } = useChats(chats)
+
+const groups = computed(() => {
+  return [
+    {
+      id: 'new-chat',
+      items: [{
+        id: 'new-chat',
+        label: 'New chat',
+        icon: 'i-lucide-plus',
+        to: '/'
+      }]
+    },
+    ...chatsGroups.value
+  ]
+})
 
 const modalUi = {
   overlay: 'bg-default/30 backdrop-blur-sm',
@@ -75,6 +90,15 @@ async function deleteChat(id: string) {
     navigateTo('/')
   }
 }
+
+defineShortcuts({
+  meta_k: {
+    usingInput: true,
+    handler: () => {
+      open.value = true
+    }
+  }
+})
 </script>
 
 <template>
@@ -92,7 +116,7 @@ async function deleteChat(id: string) {
         :fuse="{ resultLimit: 100, fuseOptions: { includeMatches: true } }"
       >
         <template #item-trailing="{ item }">
-          <div class="flex">
+          <div v-if="item.id !== 'new-chat'" class="flex">
             <UButton
               icon="i-lucide-x"
               color="neutral"

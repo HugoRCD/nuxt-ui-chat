@@ -1,8 +1,15 @@
-import { streamText, generateText, convertToModelMessages } from 'ai'
+import {
+  streamText,
+  generateText,
+  convertToModelMessages,
+  createUIMessageStream,
+  createUIMessageStreamResponse,
+  smoothStream,
+  stepCountIs
+} from 'ai'
 import { gateway } from '@ai-sdk/gateway'
 import type { UIMessage } from 'ai'
 import { z } from 'zod'
-import { weatherTool } from '~~/server/utils/tools/wheater'
 
 defineRouteMeta({
   openAPI: {
@@ -61,22 +68,34 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const result = streamText({
-    model: gateway(model),
-    system: 'You are a helpful assistant that can answer questions and help.',
-    messages: convertToModelMessages(messages),
-    async onFinish(response) {
-      console.log('response', response)
-      await db.insert(tables.messages).values({
-        chatId: chat.id,
-        role: 'assistant',
-        parts: response.content
+  const stream = createUIMessageStream({
+    execute: ({ writer }) => {
+      const result = streamText({
+        model: gateway(model),
+        system: 'You are a helpful assistant that can answer questions and help.',
+        messages: convertToModelMessages(messages),
+        experimental_transform: smoothStream({ chunking: 'word' }),
+        stopWhen: stepCountIs(5),
+        tools: {
+          weather: weatherTool
+        }
       })
+
+      result.consumeStream()
+
+      writer.merge(result.toUIMessageStream())
     },
-    tools: {
-      weather: weatherTool
+    onFinish: async ({ messages }) => {
+      console.log('response', messages)
+      await db.insert(tables.messages).values(messages.map(message => ({
+        chatId: chat.id,
+        role: message.role as 'user' | 'assistant',
+        parts: message.parts
+      })))
     }
   })
 
-  return result.toUIMessageStreamResponse()
+  return createUIMessageStreamResponse({
+    stream
+  })
 })

@@ -29,14 +29,20 @@ useSeoMeta({
   twitterImage: 'https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2NoYXQtdGVtcGxhdGUubnV4dC5kZXYiLCJpYXQiOjE3NDI4NDY2ODB9.n4YCsoNz8xatox7UMoYZFNo7iS1mC_DT0h0A9cKRoTw.jpg?theme=light',
   twitterCard: 'summary_large_image'
 })
+
+defineShortcuts({
+  c: () => {
+    navigateTo('/')
+  }
+})
 </script>
 
 <template>
   <UApp :toaster="{ position: 'top-center' }">
     <NuxtLoadingIndicator color="var(--ui-primary)" />
 
-    <NuxtLayout>
+    <UDashboardGroup unit="rem">
       <NuxtPage />
-    </NuxtLayout>
+    </UDashboardGroup>
   </UApp>
 </template>

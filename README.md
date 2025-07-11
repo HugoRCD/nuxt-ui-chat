@@ -1,95 +1,138 @@
-# Nuxt AI Chatbot Template
+# Nuxt UI Chat
 
-[![Nuxt UI Pro](https://img.shields.io/badge/Made%20with-Nuxt%20UI%20Pro-00DC82?logo=nuxt&labelColor=020420)](https://ui.nuxt.com/pro)
-[![Deploy to NuxtHub](https://img.shields.io/badge/Deploy%20to-NuxtHub-00DC82?logo=nuxt&labelColor=020420)](https://hub.nuxt.com/new?repo=nuxt-ui-pro/chat)
-
-Full-featured AI Chatbot Nuxt application with authentication, chat history, multiple pages, collapsible sidebar, keyboard shortcuts, light & dark mode, command palette and more. Built using [Nuxt UI Pro](https://ui.nuxt.com/pro) components and integrated with [Workers AI](https://ai.cloudflare.com) for a complete chat experience.
-
-- [Live demo](https://chat-template.nuxt.dev/)
-- [Documentation](https://ui.nuxt.com/getting-started/installation/pro/nuxt)
-
-<a href="https://chat-template.nuxt.dev/" target="_blank">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2NoYXQtdGVtcGxhdGUubnV4dC5kZXYiLCJpYXQiOjE3NDI4NDY2ODB9.n4YCsoNz8xatox7UMoYZFNo7iS1mC_DT0h0A9cKRoTw.jpg?theme=dark">
-    <source media="(prefers-color-scheme: light)" srcset="https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2NoYXQtdGVtcGxhdGUubnV4dC5kZXYiLCJpYXQiOjE3NDI4NDY2ODB9.n4YCsoNz8xatox7UMoYZFNo7iS1mC_DT0h0A9cKRoTw.jpg?theme=light">
-    <img alt="Nuxt AI Chatbot Template" src="https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2NoYXQtdGVtcGxhdGUubnV4dC5kZXYiLCJpYXQiOjE3NDI4NDY2ODB9.n4YCsoNz8xatox7UMoYZFNo7iS1mC_DT0h0A9cKRoTw.jpg">
-  </picture>
-</a>
+A modern, full-featured AI chatbot application built with Nuxt 3, Nuxt UI Pro, and the Vercel AI SDK. Features real-time streaming, multiple AI models support via AI Gateway, persistent chat history with PostgreSQL, and a beautiful responsive interface.
 
 ## Features
 
-- ⚡️ **Streaming AI messages** powered by the [Vercel AI SDK ](https://sdk.vercel.ai)
-- 🤖 **Multiple model support** via [Workers AI](https://ai.cloudflare.com) with support for [AI Gateway](https://developers.cloudflare.com/ai-gateway/)
-- 🔐 **Authentication** via [nuxt-auth-utils](https://github.com/atinux/nuxt-auth-utils)
-- 💾 **Chat history persistence** using [NuxtHub database](https://hub.nuxt.com/docs/features/database) and [Drizzle ORM](https://orm.drizzle.team)
-- 🚀 **One-click deploy** to your Cloudflare account with NuxtHub: [deploy now](https://hub.nuxt.com/new?repo=nuxt-ui-pro/chat)
+- ⚡️ **Streaming AI responses** powered by [Vercel AI SDK](https://sdk.vercel.ai)
+- 🤖 **Multiple AI models** support via [Vercel AI Gateway](https://vercel.com/docs/ai/ai-gateway) - access OpenAI, Anthropic, Google, and more
+- 🔐 **GitHub authentication** via [nuxt-auth-utils](https://github.com/atinux/nuxt-auth-utils)
+- 💾 **Persistent chat history** with PostgreSQL and [Drizzle ORM](https://orm.drizzle.team)
+- 🎨 **Beautiful UI** built with [Nuxt UI Pro](https://ui.nuxt.com/pro) components
+- ⚡ **Real-time syntax highlighting** with Shiki
+- 📱 **Responsive design** optimized for all devices
+- ⌨️ **Keyboard shortcuts** and command palette
+- 🔍 **Chat search** and management
+
+## Tech Stack
+
+- **Frontend**: Nuxt 3, Vue 3, TypeScript, Nuxt UI Pro, Tailwind CSS
+- **AI**: Vercel AI SDK, Vercel AI Gateway, Workers AI Provider
+- **Database**: PostgreSQL with Drizzle ORM
+- **Authentication**: GitHub OAuth via nuxt-auth-utils
+- **Deployment**: Vercel (recommended)
 
 ## Quick Start
 
 ```bash
-npx nuxi@latest init -t github:nuxt-ui-pro/chat
+git clone <your-repo-url>
+cd nuxt-ui-chat
+pnpm install
 ```
 
 ## Setup
 
-Make sure to install the dependencies:
+### Environment Variables
 
-```bash
-pnpm install
-```
-
-Next, link a NuxtHub project (even if not deployed) to access AI models in development:
-
-```bash
-npx nuxthub link
-```
-
-> [!TIP]
-> It works with free Cloudflare and NuxtHub accounts.
-
-To add authentication with GitHub, you need to [create a GitHub OAuth application](https://github.com/settings/applications/new) and then fill the credentials in your `.env`:
+Create a `.env` file with the following variables:
 
 ```env
+# GitHub OAuth (create at https://github.com/settings/applications/new)
 NUXT_OAUTH_GITHUB_CLIENT_ID=<your-github-oauth-app-client-id>
 NUXT_OAUTH_GITHUB_CLIENT_SECRET=<your-github-oauth-app-client-secret>
+
+# Database (recommended: Neon PostgreSQL)
+DATABASE_URL=<your-postgresql-connection-string>
+
+# Vercel AI Gateway (optional but recommended for analytics and caching)
+AI_GATEWAY_API_KEY=<your-vercel-ai-gateway-api-key>
+
+# Nuxt UI Pro License (required for production)
+NUXT_UI_PRO_LICENSE=<your-nuxt-ui-pro-license>
 ```
+
+### Database Setup
+
+We recommend using [Neon](https://neon.tech) for PostgreSQL hosting, especially with Vercel's integration:
+
+1. Create a Neon account and database
+2. Copy the connection string to `DATABASE_URL`
+3. Run database migrations:
+
+```bash
+pnpm db:generate
+pnpm db:migrate
+```
+
+### AI Gateway Setup (Optional)
+
+For better analytics, caching, and cost optimization:
+
+1. Create a [Vercel AI Gateway](https://vercel.com/docs/ai/ai-gateway)
+2. Add the API key to `AI_GATEWAY_API_KEY`
 
 ## Development
 
-Start the development server on `http://localhost:3000`:
+Start the development server:
 
 ```bash
 pnpm dev
 ```
 
+The app will be available at `http://localhost:3000`
+
 ## Production
 
-Build the application for production:
+Build for production:
 
 ```bash
 pnpm build
 ```
 
-> [!IMPORTANT]
-> Make sure to add your [Nuxt UI Pro License](https://ui.nuxt.com/getting-started/license) in order to build for production
-
-Locally preview production build:
+Preview production build locally:
 
 ```bash
 pnpm preview
 ```
 
-Deploy to your Cloudflare account with zero configuration:
+## Deployment
+
+### Vercel (Recommended)
+
+1. Connect your repository to Vercel
+2. Configure environment variables in Vercel dashboard
+3. Ensure Neon integration is set up for the database
+4. Deploy!
+
+### Other Platforms
+
+This app can be deployed on any platform that supports Node.js and PostgreSQL:
+
+- Railway
+- Render
+- DigitalOcean App Platform
+- Self-hosted with Docker
+
+## Database Commands
 
 ```bash
-npx nuxthub deploy
+# Generate new migration after schema changes
+pnpm db:generate
+
+# Apply migrations to database
+pnpm db:migrate
+
+# Type checking
+pnpm typecheck
+
+# Linting
+pnpm lint
 ```
 
-> [!NOTE]
-> NuxtHub will automatically spawn a D1 database and apply the database migrations when deploying your project.
+## License
 
-Optionally, you can create a [Cloudflare AI Gateway](https://developers.cloudflare.com/ai-gateway/) to have usage analytics and the ability to cache response to reduce costs. Once created, you can add the `NUXT_CLOUDFLARE_GATEWAY_ID` environment variable with the named of your gateway.
+This project requires a [Nuxt UI Pro license](https://ui.nuxt.com/getting-started/license) for production use.
 
-## Renovate integration
+## Contributing
 
-Install [Renovate GitHub app](https://github.com/apps/renovate/installations/select_target) on your repository and you are good to go.
+Feel free to contribute by opening issues or submitting pull requests!

@@ -5,10 +5,13 @@ import { DefaultChatTransport } from 'ai'
 import type { UIMessage } from 'ai'
 import { useClipboard } from '@vueuse/core'
 import ProseStreamPre from '../../components/prose/PreStream.vue'
+import { messages } from '~~/server/database/schema'
 
 const components = {
   pre: ProseStreamPre as unknown as DefineComponent
 }
+
+const { user } = useUserSession()
 
 const route = useRoute()
 const clipboard = useClipboard()
@@ -52,6 +55,7 @@ const chat = new Chat({
       model: model.value.value
     }
   }),
+  maxSteps: 5,
   onFinish() {
     refreshNuxtData('chats')
   }
@@ -108,7 +112,24 @@ function getMessageContent(message: UIMessage & { content?: string }) {
         <UChatMessages
           :messages="chat.messages as any"
           :status="chat.status"
-          :assistant="{ actions: [{ label: 'Copy', icon: copied ? 'i-lucide-copy-check' : 'i-lucide-copy', onClick: copy }] }"
+          :user="{
+            avatar: {
+              src: user?.avatar,
+              alt: user?.username
+            }
+          }"
+          :assistant="{
+            avatar: {
+              icon: 'i-lucide-sparkles'
+            },
+            actions: [
+              {
+                abel: 'Copy',
+                icon: copied ? 'i-lucide-copy-check' : 'i-lucide-copy',
+                onClick: copy
+              }
+            ]
+          }"
           class="lg:pt-(--ui-header-height) pb-4 sm:pb-6"
           :spacing-offset="160"
           :ui="{
@@ -116,22 +137,30 @@ function getMessageContent(message: UIMessage & { content?: string }) {
           }"
         >
           <template #content="{ message }">
-            <template v-for="part in message.parts as UIMessage['parts']" :key="part.type">
-              <ToolWeather
-                v-if="part.type === 'tool-weather' || (part.toolName === 'weather' && (part as any).type === 'tool-result')"
-                :output="(part as any).output"
+            <div class="space-y-4">
+              <!-- <div v-if="message.role === 'assistant' && message.parts?.length === 0">
+                <div class="flex items-center gap-2">
+                  <UIcon name="i-lucide-sparkles" class="size-4" />
+                  <TextGradient text="Thinking..." class="mt-0.5" />
+                </div>
+              </div> -->
+              <MDCCached
+                :value="getMessageContent(message as UIMessage)"
+                :cache-key="message.id"
+                unwrap="p"
+                :components="components"
+                :parser-options="{ highlight: false }"
               />
-            </template>
-            <MDCCached
-              :value="getMessageContent(message as UIMessage)"
-              :cache-key="message.id"
-              unwrap="p"
-              :components="components"
-              :parser-options="{ highlight: false }"
-            />
+              <template v-for="part in message.parts as UIMessage['parts']" :key="part.type">
+                <ToolWeather v-if="part.type === 'tool-weather'" :output="(part as any).output" />
+              </template>
+            </div>
           </template>
           <template #indicator>
-            <TextBloom label="Thinking..." />
+            <div class="flex items-center gap-2">
+              <UIcon name="i-lucide-loader" class="animate-spin size-4" />
+              <TextGradient text="Thinking..." class="mt-0.5" />
+            </div>
           </template>
         </UChatMessages>
 

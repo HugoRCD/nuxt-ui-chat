@@ -55,7 +55,7 @@ export function useChats(chats: Ref<Chat[] | undefined>) {
     // Create formatted groups for navigation
     const formattedGroups = [] as Array<{
       id: string
-      label: string
+      label?: string
       items: Array<Chat>
     }>
 

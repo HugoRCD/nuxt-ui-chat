@@ -9,9 +9,6 @@ const colorMode = useColorMode()
 const appConfig = useAppConfig()
 const { user, clear } = useUserSession()
 
-const colors = ['red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose']
-const neutrals = ['slate', 'gray', 'zinc', 'neutral', 'stone']
-
 const items = computed<DropdownMenuItem[][]>(() => ([[{
   type: 'label',
   label: user.value?.name || user.value?.username,
@@ -20,50 +17,6 @@ const items = computed<DropdownMenuItem[][]>(() => ([[{
     alt: user.value?.name || user.value?.username
   }
 }], [{
-  label: 'Theme',
-  icon: 'i-lucide-palette',
-  children: [{
-    label: 'Primary',
-    slot: 'chip',
-    chip: appConfig.ui.colors.primary,
-    content: {
-      align: 'center',
-      collisionPadding: 16
-    },
-    children: colors.map(color => ({
-      label: color,
-      chip: color,
-      slot: 'chip',
-      checked: appConfig.ui.colors.primary === color,
-      type: 'checkbox',
-      onSelect: (e) => {
-        e.preventDefault()
-
-        appConfig.ui.colors.primary = color
-      }
-    }))
-  }, {
-    label: 'Neutral',
-    slot: 'chip',
-    chip: appConfig.ui.colors.neutral,
-    content: {
-      align: 'end',
-      collisionPadding: 16
-    },
-    children: neutrals.map(color => ({
-      label: color,
-      chip: color === 'neutral' ? 'old-neutral' : color,
-      slot: 'chip',
-      type: 'checkbox',
-      checked: appConfig.ui.colors.neutral === color,
-      onSelect: (e) => {
-        e.preventDefault()
-
-        appConfig.ui.colors.neutral = color
-      }
-    }))
-  }]
-}, {
   label: 'Appearance',
   icon: 'i-lucide-sun-moon',
   children: [{
@@ -91,30 +44,6 @@ const items = computed<DropdownMenuItem[][]>(() => ([[{
     }
   }]
 }], [{
-  label: 'Templates',
-  icon: 'i-lucide-layout-template',
-  children: [{
-    label: 'Starter',
-    to: 'https://ui-pro-starter.nuxt.dev/'
-  }, {
-    label: 'Landing',
-    to: 'https://landing-template.nuxt.dev/'
-  }, {
-    label: 'Docs',
-    to: 'https://docs-template.nuxt.dev/'
-  }, {
-    label: 'SaaS',
-    to: 'https://saas-template.nuxt.dev/'
-  }, {
-    label: 'Dashboard',
-    to: 'https://dashboard-template.nuxt.dev/'
-  }, {
-    label: 'Chat',
-    to: 'https://chat-template.nuxt.dev/',
-    checked: true,
-    type: 'checkbox'
-  }]
-}], [{
   label: 'Documentation',
   icon: 'i-lucide-book-open',
   to: 'https://ui.nuxt.com/getting-started/installation/pro/nuxt',
@@ -122,7 +51,7 @@ const items = computed<DropdownMenuItem[][]>(() => ([[{
 }, {
   label: 'GitHub repository',
   icon: 'i-simple-icons-github',
-  to: 'https://github.com/nuxt-ui-pro/chat',
+  to: 'https://github.com/hugorcd/nuxt-ui-chat',
   target: '_blank'
 }, {
   label: 'Upgrade to Pro',
