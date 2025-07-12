@@ -1,4 +1,8 @@
-export function partsToContent(parts: unknown[]) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return parts?.map((part: any) => part?.type === 'text' ? part?.text : '').join('') || ''
+import type { UIMessage } from 'ai'
+
+export function getTextFromMessage(message: UIMessage): string {
+  return message.parts
+    .filter(part => part.type === 'text')
+    .map(part => part.text)
+    .join('')
 }

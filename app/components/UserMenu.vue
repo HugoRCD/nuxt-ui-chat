@@ -6,7 +6,6 @@ defineProps<{
 }>()
 
 const colorMode = useColorMode()
-const appConfig = useAppConfig()
 const { user, clear } = useUserSession()
 
 const items = computed<DropdownMenuItem[][]>(() => ([[{

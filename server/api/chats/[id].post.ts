@@ -63,6 +63,7 @@ export default defineEventHandler(async (event) => {
         stopWhen: stepCountIs(5),
         providerOptions: {
           google: {
+            useSearchGrounding: true,
             thinkingConfig: {
               includeThoughts: true,
               thinkingBudget: 2048
@@ -81,6 +82,7 @@ export default defineEventHandler(async (event) => {
       result.consumeStream()
 
       writer.merge(result.toUIMessageStream({
+        sendSources: true,
         sendReasoning: true
       }))
     },

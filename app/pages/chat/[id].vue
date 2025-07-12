@@ -47,12 +47,7 @@ const chat = new Chat({
 const copied = ref(false)
 
 function copy(e: MouseEvent, message: UIMessage) {
-  clipboard.copy(message.parts?.map((part) => {
-    if (part.type === 'text') {
-      return part.text
-    }
-    return part.type
-  }).join(''))
+  clipboard.copy(getTextFromMessage(message))
 
   copied.value = true
 
@@ -71,16 +66,6 @@ const handleSubmit = (e: Event) => {
   e.preventDefault()
   chat.sendMessage({ text: input.value })
   input.value = ''
-}
-
-function getMessageContent(message: UIMessage & { content?: string }) {
-  if (message.content) return message.content
-  const parts = message.parts?.map((part) => {
-    if (part.type === 'text') {
-      return part.text
-    }
-  })
-  return parts?.join('')
 }
 </script>
 
@@ -116,31 +101,46 @@ function getMessageContent(message: UIMessage & { content?: string }) {
           class="lg:pt-(--ui-header-height) pb-4 sm:pb-6"
           :spacing-offset="160"
           :ui="{
-            indicator: 'h-auto *:size-auto *:bg-transparent [&>*:nth-child(1)]:animate-none [&>*:nth-child(2)]:animate-none [&>*:nth-child(3)]:animate-none'
+            indicator: 'py-0 h-auto *:size-auto *:bg-transparent [&>*:nth-child(1)]:animate-none [&>*:nth-child(2)]:animate-none [&>*:nth-child(3)]:animate-none'
           }"
         >
           <template #content="{ message }">
+            <UButton
+              v-if="message.parts?.length === 0 && message.role === 'assistant'"
+              class="px-0 group"
+              color="neutral"
+              variant="link"
+              loading
+              loading-icon="i-lucide-loader"
+            >
+              <TextGradient text="Thinking..." />
+            </UButton>
             <div class="space-y-4">
-              <template v-for="part in message.parts as UIMessage['parts']" :key="part.type">
-                <Reasoning v-if="part.type === 'reasoning'" :part />
+              <template v-for="(part, index) in message.parts as UIMessage['parts']" :key="`${part.type}-${index}-${message.id}`">
+                <Reasoning v-if="part.type === 'reasoning'" :part="part" />
               </template>
               <MDCCached
-                :value="getMessageContent(message as UIMessage)"
+                :value="getTextFromMessage(message as UIMessage)"
                 :cache-key="message.id"
                 unwrap="p"
                 :components="components"
                 :parser-options="{ highlight: false }"
               />
-              <template v-for="part in message.parts as UIMessage['parts']" :key="part.type">
+              <template v-for="(part, index) in message.parts as UIMessage['parts']" :key="`${part.type}-${index}-${message.id}`">
                 <ToolWeather v-if="part.type === 'tool-weather'" :part="part as WeatherToolUIPart" />
               </template>
             </div>
           </template>
           <template #indicator>
-            <div class="flex items-center gap-2">
-              <UIcon name="i-lucide-loader" class="animate-spin size-4" />
-              <TextGradient text="Thinking..." class="mt-0.5" />
-            </div>
+            <UButton
+              class="px-0 group"
+              color="neutral"
+              variant="link"
+              loading
+              loading-icon="i-lucide-loader"
+            >
+              <TextGradient text="Thinking..." />
+            </UButton>
           </template>
         </UChatMessages>
 
