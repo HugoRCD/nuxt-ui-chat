@@ -122,9 +122,7 @@ function getMessageContent(message: UIMessage & { content?: string }) {
           <template #content="{ message }">
             <div class="space-y-4">
               <template v-for="part in message.parts as UIMessage['parts']" :key="part.type">
-                <div v-if="part.type === 'reasoning'">
-                  <Reasoning :text="part.text" :state="part.state" />
-                </div>
+                <Reasoning v-if="part.type === 'reasoning'" :part />
               </template>
               <MDCCached
                 :value="getMessageContent(message as UIMessage)"
@@ -134,11 +132,7 @@ function getMessageContent(message: UIMessage & { content?: string }) {
                 :parser-options="{ highlight: false }"
               />
               <template v-for="part in message.parts as UIMessage['parts']" :key="part.type">
-                <ToolWeather
-                  v-if="part.type === 'tool-weather'"
-                  :state="part.state"
-                  :output="(part as any).output"
-                />
+                <ToolWeather v-if="part.type === 'tool-weather'" :part="part as WeatherToolUIPart" />
               </template>
             </div>
           </template>

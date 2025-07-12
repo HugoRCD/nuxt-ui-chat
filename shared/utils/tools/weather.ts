@@ -1,3 +1,4 @@
+import type { ToolUIPart } from 'ai'
 import { tool } from 'ai'
 import { z } from 'zod'
 
@@ -23,6 +24,7 @@ export const weatherOutputSchema = z.object({
 })
 
 export type WeatherOutput = z.infer<typeof weatherOutputSchema>
+export type WeatherToolUIPart = ToolUIPart & { output: WeatherOutput }
 
 function getLocationWeatherData(location: string): WeatherOutput {
   const locationHash = location.toLowerCase().split('').reduce((a, b) => {

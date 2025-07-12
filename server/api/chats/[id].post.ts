@@ -64,7 +64,8 @@ export default defineEventHandler(async (event) => {
         providerOptions: {
           google: {
             thinkingConfig: {
-              includeThoughts: true
+              includeThoughts: true,
+              thinkingBudget: 2048
             }
           }
         },
