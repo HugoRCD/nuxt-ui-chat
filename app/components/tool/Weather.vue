@@ -1,12 +1,13 @@
 <script setup lang="ts">
-const props = defineProps<{
-  part: WeatherToolUIPart
+const { state, output } = defineProps<{
+  state: WeatherToolUIPart['state']
+  output: WeatherToolUIPart['output']
 }>()
 
 const hourlyForecasts = computed(() => {
-  if (!props.part.output?.hourlyForecasts) return []
+  if (!output?.hourlyForecasts) return []
 
-  return props.part.output.hourlyForecasts.map(forecast => ({
+  return output.hourlyForecasts.map(forecast => ({
     time: formatHour(forecast.hour),
     temp: forecast.temperature,
     icon: getWeatherIcon(forecast.condition)
@@ -48,18 +49,18 @@ function getConditionText(condition?: string): string {
 </script>
 
 <template>
-  <div v-if="part.state === 'output-available'" class="w-[480px] bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl px-5 py-4 text-highlighted shadow dark:shadow-lg">
+  <div v-if="state === 'output-available'" class="w-[480px] bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl px-5 py-4 text-highlighted shadow dark:shadow-lg">
     <div class="flex items-start justify-between mb-3">
       <div class="flex items-baseline gap-1">
-        <span class="text-4xl font-light">{{ Math.round(part.output.temperature || 0) }}°</span>
+        <span class="text-4xl font-light">{{ Math.round(output.temperature || 0) }}°</span>
         <span class="text-base text-highlighted/80 mt-1">C</span>
       </div>
       <div class="text-right">
         <div class="text-base font-medium mb-1">
-          {{ part.output.location || 'Unknown' }}
+          {{ output.location || 'Unknown' }}
         </div>
         <div class="text-xs text-highlighted/70">
-          H:{{ Math.round(part.output.temperatureHigh || 0) }}° L:{{ Math.round(part.output.temperatureLow || 0) }}°
+          H:{{ Math.round(output.temperatureHigh || 0) }}° L:{{ Math.round(output.temperatureLow || 0) }}°
         </div>
       </div>
     </div>
@@ -67,22 +68,22 @@ function getConditionText(condition?: string): string {
     <div class="flex items-center justify-between mb-4">
       <div class="flex items-center gap-2">
         <UIcon
-          :name="getWeatherIcon(part.output.condition)"
+          :name="getWeatherIcon(output.condition)"
           class="size-6 text-white"
         />
         <div class="text-sm font-medium">
-          {{ getConditionText(part.output.condition) }}
+          {{ getConditionText(output.condition) }}
         </div>
       </div>
 
       <div class="flex gap-3 text-xs">
         <div class="flex items-center gap-1">
           <UIcon name="i-lucide-droplets" class="size-3 text-blue-200" />
-          <span>{{ part.output.humidity || 0 }}%</span>
+          <span>{{ output.humidity || 0 }}%</span>
         </div>
         <div class="flex items-center gap-1">
           <UIcon name="i-lucide-wind" class="size-3 text-blue-200" />
-          <span>{{ part.output.windSpeed || 0 }} km/h</span>
+          <span>{{ output.windSpeed || 0 }} km/h</span>
         </div>
       </div>
     </div>
@@ -113,7 +114,7 @@ function getConditionText(condition?: string): string {
     </div>
   </div>
 
-  <div v-else-if="part.state === 'input-available'" class="w-[480px] bg-gradient-to-br from-gray-400 to-gray-600 rounded-xl px-5 py-4 text-highlighted shadow dark:shadow-lg">
+  <div v-else-if="state === 'input-available'" class="w-[480px] bg-gradient-to-br from-gray-400 to-gray-600 rounded-xl px-5 py-4 text-highlighted shadow dark:shadow-lg">
     <div class="flex items-center justify-center py-6">
       <div class="text-center">
         <UIcon
@@ -127,7 +128,7 @@ function getConditionText(condition?: string): string {
     </div>
   </div>
 
-  <div v-else-if="part.state === 'output-error'" class="w-[480px] bg-gradient-to-br from-red-500 to-red-700 rounded-xl px-5 py-4 text-highlighted shadow dark:shadow-lg">
+  <div v-else-if="state === 'output-error'" class="w-[480px] bg-gradient-to-br from-red-500 to-red-700 rounded-xl px-5 py-4 text-highlighted shadow dark:shadow-lg">
     <div class="flex items-center justify-center py-6">
       <div class="text-center">
         <UIcon

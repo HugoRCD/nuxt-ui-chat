@@ -99,6 +99,7 @@ const handleSubmit = (e: Event) => {
             ]
           }"
           class="lg:pt-(--ui-header-height) pb-4 sm:pb-6"
+          should-auto-scroll
           :spacing-offset="160"
           :ui="{
             indicator: 'py-0 h-auto *:size-auto *:bg-transparent [&>*:nth-child(1)]:animate-none [&>*:nth-child(2)]:animate-none [&>*:nth-child(3)]:animate-none'
@@ -117,7 +118,7 @@ const handleSubmit = (e: Event) => {
             </UButton>
             <div class="space-y-4">
               <template v-for="(part, index) in message.parts as UIMessage['parts']" :key="`${part.type}-${index}-${message.id}`">
-                <Reasoning v-if="part.type === 'reasoning'" :part="part" />
+                <Reasoning v-if="part.type === 'reasoning'" :state="part.state" :text="part.text" />
               </template>
               <MDCCached
                 :value="getTextFromMessage(message as UIMessage)"
@@ -127,7 +128,7 @@ const handleSubmit = (e: Event) => {
                 :parser-options="{ highlight: false }"
               />
               <template v-for="(part, index) in message.parts as UIMessage['parts']" :key="`${part.type}-${index}-${message.id}`">
-                <ToolWeather v-if="part.type === 'tool-weather'" :part="part as WeatherToolUIPart" />
+                <ToolWeather v-if="part.type === 'tool-weather'" :state="part.state as WeatherToolUIPart['state']" :output="part.output as WeatherToolUIPart['output']" />
               </template>
             </div>
           </template>

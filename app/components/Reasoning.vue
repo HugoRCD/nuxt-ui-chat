@@ -1,26 +1,27 @@
 <script setup lang="ts">
 import type { ReasoningUIPart } from 'ai'
 
-const { part } = defineProps<{
-  part: ReasoningUIPart
+const { state, text } = defineProps<{
+  state: ReasoningUIPart['state']
+  text: ReasoningUIPart['text']
 }>()
 
 const open = ref(false)
 
-watch(() => part.state, () => {
-  if (part.state === 'streaming') {
+watch(() => state, () => {
+  if (state === 'streaming') {
     open.value = true
   }
-  if (part.state === 'done') {
+  if (state === 'done') {
     open.value = false
   }
 }, { immediate: true })
 
 // Parse text into structured segments for safe rendering
 const parsedParagraphs = computed(() => {
-  if (!part.text) return []
+  if (!text) return []
 
-  const paragraphs = part.text.split(/\n\s*\n/)
+  const paragraphs = text.split(/\n\s*\n/)
 
   return paragraphs.map((paragraph) => {
     const lines = paragraph.split(/\n/)
@@ -105,14 +106,14 @@ function parseTextSegments(text: string) {
       class="px-0 group"
       color="neutral"
       variant="link"
-      :loading="part.state !== 'done'"
+      :loading="state !== 'done'"
       trailing-icon="i-lucide-chevron-down"
       loading-icon="i-lucide-loader"
       :ui="{
         trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200'
       }"
     >
-      <TextGradient v-if="part.state !== 'done'" text="Reasoning..." />
+      <TextGradient v-if="state !== 'done'" text="Reasoning..." />
       <span v-else>Reasoning</span>
     </UButton>
 
