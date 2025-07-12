@@ -30,13 +30,16 @@ export default defineEventHandler(async (event) => {
   }).parse)
 
   const db = useDrizzle()
+  const reasoningModel = isReasoningModel(model)
+  console.log('reasoningModel', reasoningModel)
+  console.log('model', model)
 
   const chat = await getChat({ chatId: id, session })
   if (!chat) {
     throw createError({ statusCode: 404, statusMessage: 'Chat not found' })
   }
 
-  if (model === 'google/gemini-2.5-flash') {
+  if (reasoningModel) {
     await handleRateLimit(event)
   }
 
@@ -68,16 +71,15 @@ export default defineEventHandler(async (event) => {
         providerOptions: {
           google: {
             useSearchGrounding: true,
-            thinkingConfig: {
-              includeThoughts: true,
-              thinkingBudget: 2048
-            }
+            reasoning: reasoningModel
+              ? {
+                  includeThoughts: true,
+                  thinkingBudget: 2048
+                }
+              : false
           }
         },
-        experimental_activeTools:
-            model === 'google/gemini-2.5-flash'
-              ? []
-              : ['weather'],
+        experimental_activeTools: reasoningModel ? [] : ['weather'],
         tools: {
           weather: weatherTool
         }

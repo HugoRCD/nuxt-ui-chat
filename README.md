@@ -16,8 +16,8 @@ A modern, full-featured AI chatbot application built with Nuxt 3, Nuxt UI Pro, a
 
 ## Tech Stack
 
-- **Frontend**: Nuxt 3, Vue 3, TypeScript, Nuxt UI Pro, Tailwind CSS
-- **AI**: Vercel AI SDK, Vercel AI Gateway, Workers AI Provider
+- **Frontend**: Nuxt, Nuxt UI Pro, TailwindCSS
+- **AI**: Vercel AI SDK, Vercel AI Gateway
 - **Database**: PostgreSQL with Drizzle ORM
 - **Authentication**: GitHub OAuth via nuxt-auth-utils
 - **Deployment**: Vercel (recommended)
