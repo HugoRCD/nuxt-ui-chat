@@ -61,6 +61,17 @@ export default defineEventHandler(async (event) => {
         messages: convertToModelMessages(messages),
         experimental_transform: smoothStream({ chunking: 'word' }),
         stopWhen: stepCountIs(5),
+        providerOptions: {
+          google: {
+            thinkingConfig: {
+              includeThoughts: true
+            }
+          }
+        },
+        experimental_activeTools:
+            model === 'google/gemini-2.5-flash'
+              ? []
+              : ['weather'],
         tools: {
           weather: weatherTool
         }

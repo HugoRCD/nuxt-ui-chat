@@ -21,10 +21,10 @@ export function useLLM() {
       value: 'google/gemini-2.0-flash'
     },
     {
-      label: 'Gemini 2.5 Pro',
+      label: 'Gemini 2.5 Flash',
       icon: 'i-simple-icons:google',
       company: 'Google',
-      value: 'google/gemini-2.5-pro',
+      value: 'google/gemini-2.5-flash',
       reasoning: true
     }
   ] satisfies SelectMenuItem[]

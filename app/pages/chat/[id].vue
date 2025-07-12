@@ -121,12 +121,11 @@ function getMessageContent(message: UIMessage & { content?: string }) {
         >
           <template #content="{ message }">
             <div class="space-y-4">
-              <!-- <div v-if="message.role === 'assistant' && message.parts?.length === 0">
-                <div class="flex items-center gap-2">
-                  <UIcon name="i-lucide-sparkles" class="size-4" />
-                  <TextGradient text="Thinking..." class="mt-0.5" />
+              <template v-for="part in message.parts as UIMessage['parts']" :key="part.type">
+                <div v-if="part.type === 'reasoning'">
+                  <Reasoning :text="part.text" :state="part.state" />
                 </div>
-              </div> -->
+              </template>
               <MDCCached
                 :value="getMessageContent(message as UIMessage)"
                 :cache-key="message.id"

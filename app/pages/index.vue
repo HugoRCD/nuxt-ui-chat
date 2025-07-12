@@ -17,6 +17,16 @@ async function createChat(prompt: string) {
     method: 'POST',
     body: { input: prompt }
   })
+  if (!chat) {
+    const toast = useToast()
+    toast.add({
+      title: 'Failed to create chat',
+      description: 'Please try again later',
+      color: 'error'
+    })
+    loading.value = false
+    return
+  }
 
   refreshNuxtData('chats')
   navigateTo(`/chat/${chat.id}`)
