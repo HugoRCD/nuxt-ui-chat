@@ -17,32 +17,32 @@
     "db:push": "drizzle-kit push"
   },
   "dependencies": {
-    "@ai-sdk/gateway": "1.0.0-beta.4",
-    "@ai-sdk/vue": "2.0.0-beta.13",
+    "@ai-sdk/gateway": "1.0.0-beta.5",
+    "@ai-sdk/vue": "2.0.0-beta.16",
     "@iconify-json/logos": "^1.2.4",
-    "@iconify-json/lucide": "^1.2.53",
-    "@iconify-json/simple-icons": "^1.2.40",
+    "@iconify-json/lucide": "^1.2.57",
+    "@iconify-json/simple-icons": "^1.2.42",
     "@nuxt/ui-pro": "^3.2.0",
     "@nuxtjs/mdc": "^0.17.0",
-    "ai": "5.0.0-beta.12",
+    "ai": "5.0.0-beta.15",
     "date-fns": "^4.1.0",
     "drizzle-orm": "^0.44.2",
     "nuxt": "^3.17.6",
     "nuxt-auth-utils": "^0.5.20",
     "pg": "^8.16.3",
     "shiki-stream": "^0.1.2",
-    "workers-ai-provider": "^0.7.0"
+    "workers-ai-provider": "^0.7.2"
   },
   "devDependencies": {
-    "@nuxt/eslint": "^1.4.1",
-    "@types/node": "^22.15.34",
+    "@nuxt/eslint": "^1.5.2",
+    "@types/node": "^22.16.3",
     "drizzle-kit": "^0.31.4",
-    "eslint": "^9.30.0",
+    "eslint": "^9.31.0",
     "typescript": "^5.8.3",
     "vue-tsc": "^3.0.1"
   },
   "resolutions": {
     "unimport": "4.1.1"
   },
-  "packageManager": "pnpm@10.12.4"
+  "packageManager": "pnpm@10.13.1"
 }
