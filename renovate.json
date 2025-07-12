@@ -10,5 +10,6 @@
     "matchDepTypes": ["resolutions"],
     "enabled": false
   }],
+  "ignoreDeps": ["@ai-sdk/vue", "ai"],
   "postUpdateOptions": ["pnpmDedupe"]
 }
