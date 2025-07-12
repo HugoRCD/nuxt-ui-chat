@@ -6,8 +6,8 @@ const { model } = useLLM()
 
 const { loggedIn } = useUserSession()
 
-const canUseReasoningModels = computed(() => {
-  return loggedIn.value && model.value.reasoning
+const canUseModel = computed(() => {
+  return !model.value.reasoning || (model.value.reasoning && loggedIn.value)
 })
 
 async function createChat(prompt: string) {
@@ -82,16 +82,16 @@ const quickChats = [
         <UChatPrompt
           v-model="input"
           :status="loading ? 'streaming' : 'ready'"
-          :disabled="!canUseReasoningModels"
+          :disabled="!canUseModel"
           class="[view-transition-name:chat-prompt]"
           variant="subtle"
           @submit="onSubmit"
         >
-          <UChatPromptSubmit color="neutral" :disabled="!canUseReasoningModels" />
+          <UChatPromptSubmit color="neutral" :disabled="!canUseModel" />
 
           <template #footer>
             <ModelSelect v-model="model" />
-            <div v-if="!canUseReasoningModels && model.reasoning" class="text-xs sm:text-sm flex items-center gap-2 text-red-500">
+            <div v-if="!canUseModel" class="text-xs sm:text-sm flex items-center gap-2 text-red-500">
               <UIcon name="i-lucide-alert-triangle" class="size-4 shrink-0" />
               <span>You need to be logged in to use reasoning models</span>
             </div>

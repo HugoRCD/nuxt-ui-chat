@@ -38,7 +38,7 @@ defineShortcuts({
 </script>
 
 <template>
-  <UApp :toaster="{ position: 'top-center' }">
+  <UApp :toaster="{ position: 'top-center', expand: false }">
     <NuxtLoadingIndicator color="var(--ui-primary)" />
 
     <UDashboardGroup unit="rem">

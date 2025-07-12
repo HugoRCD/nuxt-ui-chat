@@ -8,7 +8,6 @@ export async function generateTitleFromUserMessage({
 }: {
   message: UIMessage
 }) {
-  console.log('message', message)
   const { text: title } = await generateText({
     model: gateway('openai/gpt-4.1-nano'),
     system: `You are a title generator for a chat:
@@ -19,8 +18,6 @@ export async function generateTitleFromUserMessage({
         - Do not use markdown, just plain text`,
     prompt: JSON.stringify(message)
   })
-
-  console.log('title', title)
 
   return title
 }
@@ -69,7 +66,9 @@ export async function getChat({
   return await db.query.chats.findFirst({
     where: (chat, { eq }) => and(eq(chat.id, chatId as string), eq(chat.userId, session.user?.id || session.id)),
     with: {
-      messages: true
+      messages: {
+        orderBy: (message, { asc }) => asc(message.createdAt)
+      }
     }
   })
 }

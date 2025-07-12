@@ -36,6 +36,10 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 404, statusMessage: 'Chat not found' })
   }
 
+  if (model === 'google/gemini-2.5-flash') {
+    await handleRateLimit(event)
+  }
+
   if (!chat.title) {
     const message = messages[0]
     if (!message) {

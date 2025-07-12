@@ -11,9 +11,10 @@ const components = {
 }
 
 const { user, loggedIn } = useUserSession()
+const { handleRateLimitError } = useRateLimit()
 
-const canUseReasoningModels = computed(() => {
-  return loggedIn.value && model.value.reasoning
+const canUseModel = computed(() => {
+  return !model.value.reasoning || (model.value.reasoning && loggedIn.value)
 })
 
 const route = useRoute()
@@ -41,6 +42,18 @@ const chat = new Chat({
   maxSteps: 5,
   onFinish() {
     refreshNuxtData('chats')
+  },
+  onError: (error) => {
+    if (error.message?.includes('Rate limit exceeded') || error.message?.includes('429')) {
+      handleRateLimitError()
+    } else {
+      useToast().add({
+        title: 'Error',
+        description: error.message || 'An unexpected error occurred. Please try again.',
+        color: 'error',
+        icon: 'i-lucide-alert-circle'
+      })
+    }
   }
 })
 
@@ -74,11 +87,13 @@ const handleSubmit = (e: Event) => {
     <template #header>
       <DashboardNavbar />
     </template>
-
     <template #body>
       <UContainer class="flex-1 flex flex-col gap-4 sm:gap-6">
         <UChatMessages
-          :messages="chat.messages as any"
+          :messages="chat.messages.map(message => ({
+            ...message,
+            content: '' // FIXME: This is a hack to make the UChatMessages component work with aiSDK v5
+          }))"
           :status="chat.status"
           :user="{
             avatar: {
@@ -148,7 +163,7 @@ const handleSubmit = (e: Event) => {
         <UChatPrompt
           v-model="input"
           :error="chat.error"
-          :disabled="!canUseReasoningModels"
+          :disabled="!canUseModel"
           variant="subtle"
           class="sticky bottom-4 [view-transition-name:chat-prompt] z-10"
           @submit="handleSubmit"
@@ -156,14 +171,14 @@ const handleSubmit = (e: Event) => {
           <UChatPromptSubmit
             :status="chat.status"
             color="neutral"
-            :disabled="!canUseReasoningModels"
+            :disabled="!canUseModel"
             @stop="chat.stop"
             @reload="chat.regenerate"
           />
 
           <template #footer>
             <ModelSelect v-model="model" />
-            <div v-if="!canUseReasoningModels && model.reasoning" class="text-xs sm:text-sm flex items-center gap-2 text-red-500">
+            <div v-if="!canUseModel" class="text-xs sm:text-sm flex items-center gap-2 text-red-500">
               <UIcon name="i-lucide-alert-triangle" class="size-4 shrink-0" />
               <span>You need to be logged in to use reasoning models</span>
             </div>
