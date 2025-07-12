@@ -27,16 +27,19 @@ export default defineEventHandler(async (event) => {
     }
   }
 
-  const chat = await db.insert(tables.chats).values({
+  const [chat] = await db.insert(tables.chats).values({
     title: '',
     userId
   }).returning()
 
-  await db.insert(tables.messages).values({
-    chatId: chat[0]?.id || '',
-    role: 'user',
-    content: input
+  await saveLastUserMessage({
+    chatId: chat?.id || '',
+    message: {
+      id: '',
+      role: 'user',
+      parts: [{ type: 'text', text: input }]
+    }
   })
 
-  return chat[0]
+  return chat
 })

@@ -1,7 +1,11 @@
+import { z } from 'zod'
+
 export default defineEventHandler(async (event) => {
   const session = await getUserSession(event)
 
-  const { id } = getRouterParams(event)
+  const { id } = await getValidatedRouterParams(event, z.object({
+    id: z.string()
+  }).parse)
 
   const db = useDrizzle()
 

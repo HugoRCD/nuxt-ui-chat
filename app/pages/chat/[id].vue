@@ -5,13 +5,16 @@ import { DefaultChatTransport } from 'ai'
 import type { UIMessage } from 'ai'
 import { useClipboard } from '@vueuse/core'
 import ProseStreamPre from '../../components/prose/PreStream.vue'
-import { messages } from '~~/server/database/schema'
 
 const components = {
   pre: ProseStreamPre as unknown as DefineComponent
 }
 
-const { user } = useUserSession()
+const { user, loggedIn } = useUserSession()
+
+const canUseReasoningModels = computed(() => {
+  return loggedIn.value && model.value.reasoning
+})
 
 const route = useRoute()
 const clipboard = useClipboard()
@@ -21,34 +24,14 @@ const input = ref('')
 const { data } = await useFetch(`/api/chats/${route.params.id}`, {
   cache: 'force-cache'
 })
+console.log('data', data.value)
 if (!data.value) {
   throw createError({ statusCode: 404, statusMessage: 'Chat not found', fatal: true })
 }
-console.log('data', data.value)
 
 const chat = new Chat({
   id: data.value.id,
-  messages: data.value.messages.map((message) => {
-    if (message.content) {
-      return {
-        id: message.id,
-        parts: [{ type: 'text', text: message.content }],
-        role: message.role
-      }
-    }
-    if (message.parts) {
-      return {
-        id: message.id,
-        parts: message.parts,
-        role: message.role
-      }
-    }
-    return {
-      id: message.id,
-      parts: [{ type: 'text', text: 'Empty message' }],
-      role: message.role
-    }
-  }),
+  messages: data.value.messages,
   transport: new DefaultChatTransport({
     api: `/api/chats/${data.value.id}`,
     body: {
@@ -152,7 +135,11 @@ function getMessageContent(message: UIMessage & { content?: string }) {
                 :parser-options="{ highlight: false }"
               />
               <template v-for="part in message.parts as UIMessage['parts']" :key="part.type">
-                <ToolWeather v-if="part.type === 'tool-weather'" :output="(part as any).output" />
+                <ToolWeather
+                  v-if="part.type === 'tool-weather'"
+                  :state="part.state"
+                  :output="(part as any).output"
+                />
               </template>
             </div>
           </template>
@@ -167,6 +154,7 @@ function getMessageContent(message: UIMessage & { content?: string }) {
         <UChatPrompt
           v-model="input"
           :error="chat.error"
+          :disabled="!canUseReasoningModels"
           variant="subtle"
           class="sticky bottom-4 [view-transition-name:chat-prompt] z-10"
           @submit="handleSubmit"
@@ -174,12 +162,17 @@ function getMessageContent(message: UIMessage & { content?: string }) {
           <UChatPromptSubmit
             :status="chat.status"
             color="neutral"
+            :disabled="!canUseReasoningModels"
             @stop="chat.stop"
             @reload="chat.regenerate"
           />
 
           <template #footer>
             <ModelSelect v-model="model" />
+            <div v-if="!canUseReasoningModels && model.reasoning" class="text-xs sm:text-sm flex items-center gap-2 text-red-500">
+              <UIcon name="i-lucide-alert-triangle" class="size-4 shrink-0" />
+              <span>You need to be logged in to use reasoning models</span>
+            </div>
           </template>
         </UChatPrompt>
       </UContainer>

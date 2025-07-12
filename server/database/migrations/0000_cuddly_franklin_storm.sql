@@ -11,7 +11,7 @@ CREATE TABLE "messages" (
 	"id" varchar(36) PRIMARY KEY NOT NULL,
 	"chatId" varchar(36) NOT NULL,
 	"role" "role" NOT NULL,
-	"content" varchar(10000) NOT NULL,
+	"parts" json,
 	"createdAt" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint

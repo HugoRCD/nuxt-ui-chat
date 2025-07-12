@@ -12,7 +12,9 @@
     "lint": "eslint .",
     "typecheck": "nuxt typecheck",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate"
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "db:push": "drizzle-kit push"
   },
   "dependencies": {
     "@ai-sdk/gateway": "1.0.0-beta.4",

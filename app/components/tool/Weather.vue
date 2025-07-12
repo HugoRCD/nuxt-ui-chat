@@ -1,23 +1,9 @@
 <script setup lang="ts">
-interface HourlyForecast {
-  hour: number
-  temperature: number
-  condition: string
-}
-
-interface WeatherOutput {
-  location?: string
-  temperature?: number
-  temperatureHigh?: number
-  temperatureLow?: number
-  condition?: string
-  humidity?: number
-  windSpeed?: number
-  hourlyForecasts?: HourlyForecast[]
-}
+import type { ToolUIPart } from 'ai'
 
 const props = defineProps<{
-  output?: WeatherOutput
+  state?: ToolUIPart['state']
+  output: WeatherOutput
 }>()
 
 const hourlyForecasts = computed(() => {
@@ -65,7 +51,7 @@ function getConditionText(condition?: string): string {
 </script>
 
 <template>
-  <div v-if="output" class="w-[480px] bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl px-5 py-4 text-highlighted shadow dark:shadow-lg">
+  <div v-if="state === 'output-available'" class="w-[480px] bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl px-5 py-4 text-highlighted shadow dark:shadow-lg">
     <div class="flex items-start justify-between mb-3">
       <div class="flex items-baseline gap-1">
         <span class="text-4xl font-light">{{ Math.round(output.temperature || 0) }}°</span>
@@ -130,7 +116,7 @@ function getConditionText(condition?: string): string {
     </div>
   </div>
 
-  <div v-else class="w-[480px] bg-gradient-to-br from-gray-400 to-gray-600 rounded-xl px-5 py-4 text-highlighted shadow dark:shadow-lg">
+  <div v-else-if="state === 'input-available'" class="w-[480px] bg-gradient-to-br from-gray-400 to-gray-600 rounded-xl px-5 py-4 text-highlighted shadow dark:shadow-lg">
     <div class="flex items-center justify-center py-6">
       <div class="text-center">
         <UIcon
@@ -139,6 +125,20 @@ function getConditionText(condition?: string): string {
         />
         <div class="text-sm">
           Loading weather data...
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div v-else-if="state === 'output-error'" class="w-[480px] bg-gradient-to-br from-red-500 to-red-700 rounded-xl px-5 py-4 text-highlighted shadow dark:shadow-lg">
+    <div class="flex items-center justify-center py-6">
+      <div class="text-center">
+        <UIcon
+          name="i-lucide-alert-triangle"
+          class="size-8 text-white mx-auto mb-2"
+        />
+        <div class="text-sm">
+          Can't get weather data, please try again later
         </div>
       </div>
     </div>

@@ -19,6 +19,13 @@ export function useLLM() {
       icon: 'i-simple-icons:google',
       company: 'Google',
       value: 'google/gemini-2.0-flash'
+    },
+    {
+      label: 'Gemini 2.5 Pro',
+      icon: 'i-simple-icons:google',
+      company: 'Google',
+      value: 'google/gemini-2.5-pro',
+      reasoning: true
     }
   ] satisfies SelectMenuItem[]
 
@@ -28,6 +35,7 @@ export function useLLM() {
     icon: string
     company: string
     value: string
+    reasoning?: boolean
   }>('llm-model', { default: () => {
     return {
       label: 'GPT-4.1 Nano',

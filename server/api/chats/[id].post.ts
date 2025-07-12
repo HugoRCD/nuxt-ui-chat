@@ -1,6 +1,5 @@
 import {
   streamText,
-  generateText,
   convertToModelMessages,
   createUIMessageStream,
   createUIMessageStreamResponse,
@@ -21,7 +20,10 @@ defineRouteMeta({
 export default defineEventHandler(async (event) => {
   const session = await getUserSession(event)
 
-  const { id } = getRouterParams(event)
+  const { id } = await getValidatedRouterParams(event, z.object({
+    id: z.string()
+  }).parse)
+
   const { model, messages } = await readValidatedBody(event, z.object({
     model: z.string(),
     messages: z.array(z.custom<UIMessage>())
@@ -29,42 +31,25 @@ export default defineEventHandler(async (event) => {
 
   const db = useDrizzle()
 
-  const chat = await db.query.chats.findFirst({
-    where: (chat, { eq }) => and(eq(chat.id, id as string), eq(chat.userId, session.user?.id || session.id)),
-    with: {
-      messages: true
-    }
-  })
+  const chat = await getChat({ chatId: id, session })
   if (!chat) {
     throw createError({ statusCode: 404, statusMessage: 'Chat not found' })
   }
 
   if (!chat.title) {
-    const { text: title } = await generateText({
-      model: gateway('openai/gpt-4.1-nano'),
-      messages: [{
-        role: 'system',
-        content: `You are a title generator for a chat:
-        - Generate a short title based on the first user's message
-        - The title should be less than 30 characters long
-        - The title should be a summary of the user's message
-        - Do not use quotes (' or ") or colons (:) or any other punctuation
-        - Do not use markdown, just plain text`
-      }, {
-        role: 'user',
-        content: chat.messages[0]!.content || ''
-      }]
-    })
-    setHeader(event, 'X-Chat-Title', title.replace(/:/g, '').split('\n')[0])
-    await db.update(tables.chats).set({ title }).where(eq(tables.chats.id, id as string))
+    const message = messages[0]
+    if (!message) {
+      throw createError({ statusCode: 400, statusMessage: 'No message provided' })
+    }
+    const title = await generateTitleFromUserMessage({ message })
+    await db.update(tables.chats).set({ title }).where(eq(tables.chats.id, id))
   }
 
   const lastMessage = messages[messages.length - 1]
   if (lastMessage?.role === 'user' && messages.length > 1) {
-    await db.insert(tables.messages).values({
-      chatId: id as string,
-      role: 'user',
-      parts: lastMessage.parts
+    await saveLastUserMessage({
+      chatId: id,
+      message: lastMessage
     })
   }
 
@@ -83,15 +68,15 @@ export default defineEventHandler(async (event) => {
 
       result.consumeStream()
 
-      writer.merge(result.toUIMessageStream())
+      writer.merge(result.toUIMessageStream({
+        sendReasoning: true
+      }))
     },
     onFinish: async ({ messages }) => {
-      console.log('response', messages)
-      await db.insert(tables.messages).values(messages.map(message => ({
+      await saveMessages({
         chatId: chat.id,
-        role: message.role as 'user' | 'assistant',
-        parts: message.parts
-      })))
+        messages
+      })
     }
   })
 

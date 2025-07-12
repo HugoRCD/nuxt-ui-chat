@@ -1,5 +1,5 @@
 {
-  "id": "1dffd13e-e88b-4ab5-8826-2e73c5520528",
+  "id": "68bd888b-9ad8-4771-8d85-f63ca95d804f",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -95,11 +95,11 @@
           "primaryKey": false,
           "notNull": true
         },
-        "content": {
-          "name": "content",
-          "type": "varchar(10000)",
+        "parts": {
+          "name": "parts",
+          "type": "json",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "createdAt": {
           "name": "createdAt",
