@@ -1,5 +1,16 @@
 # Nuxt UI Chat
 
+TODO:
+- [x] Basic rate limit
+- [ ] Better rate limit handling
+- [ ] Better rate limit handling in the UI (display)
+- [ ] Web search with sources display
+- [ ] Abort streaming
+- [ ] Resume streaming on page reload
+- [ ] Image generation
+- [ ] Add image to message
+- [ ] Change model during conversation
+
 A modern, full-featured AI chatbot application built with Nuxt 3, Nuxt UI Pro, and the Vercel AI SDK. Features real-time streaming, multiple AI models support via AI Gateway, persistent chat history with PostgreSQL, and a beautiful responsive interface.
 
 ## Features
