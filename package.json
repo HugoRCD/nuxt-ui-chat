@@ -18,13 +18,13 @@
   },
   "dependencies": {
     "@ai-sdk/gateway": "1.0.0-beta.5",
-    "@ai-sdk/vue": "2.0.0-canary.23",
+    "@ai-sdk/vue": "2.0.0-beta.16",
     "@iconify-json/logos": "^1.2.4",
     "@iconify-json/lucide": "^1.2.57",
     "@iconify-json/simple-icons": "^1.2.42",
     "@nuxt/ui-pro": "^3.2.0",
     "@nuxtjs/mdc": "^0.17.0",
-    "ai": "5.0.0-canary.24",
+    "ai": "5.0.0-beta.15",
     "date-fns": "^4.1.0",
     "drizzle-orm": "^0.44.2",
     "nuxt": "^3.17.6",
@@ -39,7 +39,7 @@
     "drizzle-kit": "^0.31.4",
     "eslint": "^9.31.0",
     "typescript": "^5.8.3",
-    "vue-tsc": "^2.2.12"
+    "vue-tsc": "^3.0.1"
   },
   "resolutions": {
     "unimport": "4.1.1"
