@@ -70,16 +70,14 @@ export default defineEventHandler(async (event) => {
         stopWhen: stepCountIs(5),
         providerOptions: {
           google: {
-            useSearchGrounding: true,
-            reasoning: reasoningModel
+            thinkingConfig: reasoningModel
               ? {
                   includeThoughts: true,
                   thinkingBudget: 2048
                 }
-              : false
+              : {}
           }
         },
-        experimental_activeTools: reasoningModel ? [] : ['weather'],
         tools: {
           weather: weatherTool
         }
@@ -88,7 +86,6 @@ export default defineEventHandler(async (event) => {
       result.consumeStream()
 
       writer.merge(result.toUIMessageStream({
-        sendSources: true,
         sendReasoning: true
       }))
     },

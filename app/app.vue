@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Analytics } from '@vercel/analytics/nuxt'
+
 const colorMode = useColorMode()
 
 const color = computed(() => colorMode.value === 'dark' ? '#1b1718' : 'white')
@@ -39,6 +41,7 @@ defineShortcuts({
 
 <template>
   <UApp :toaster="{ position: 'top-center', expand: false }">
+    <Analytics />
     <NuxtLoadingIndicator color="var(--ui-primary)" />
 
     <UDashboardGroup unit="rem">

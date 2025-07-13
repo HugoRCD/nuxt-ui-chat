@@ -113,7 +113,7 @@ function parseTextSegments(text: string) {
         trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200'
       }"
     >
-      <TextGradient v-if="state !== 'done'" text="Reasoning..." />
+      <TextGradient v-if="state === 'streaming'" text="Reasoning..." />
       <span v-else>Reasoning</span>
     </UButton>
 

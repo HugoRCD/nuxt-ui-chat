@@ -12,8 +12,8 @@ importers:
   .:
     dependencies:
       '@ai-sdk/gateway':
-        specifier: 1.0.0-beta.5
-        version: 1.0.0-beta.5(zod@3.25.76)
+        specifier: 1.0.0-beta.6
+        version: 1.0.0-beta.6(zod@3.25.76)
       '@ai-sdk/vue':
         specifier: 2.0.0-beta.17
         version: 2.0.0-beta.17(vue@3.5.17(typescript@5.8.3))(zod@3.25.76)
@@ -32,6 +32,9 @@ importers:
       '@nuxtjs/mdc':
         specifier: ^0.17.0
         version: 0.17.0(magicast@0.3.5)
+      '@vercel/analytics':
+        specifier: ^1.5.0
+        version: 1.5.0(vue-router@4.5.1(vue@3.5.17(typescript@5.8.3)))(vue@3.5.17(typescript@5.8.3))
       ai:
         specifier: 5.0.0-beta.16
         version: 5.0.0-beta.16(zod@3.25.76)
@@ -86,12 +89,6 @@ packages:
         optional: true
       bcrypt:
         optional: true
-
-  '@ai-sdk/gateway@1.0.0-beta.5':
-    resolution: {integrity: sha512-+SgaqoxfFRpFQwgvCK5rh4kznz09x//n9Xtm/l3sjJwlUPLrj+wOeKCCJRWdp1Lpl5cbfdz9qWXrK7Ul+qfUJg==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      zod: ^3.25.49
 
   '@ai-sdk/gateway@1.0.0-beta.6':
     resolution: {integrity: sha512-zNsJm+kT6kEA5MLDgIhvHijzD8tlBabEwtyy09wVu/KmQ0V6OAPfRHfnSyiiYH/fGNRYmq6OhSOtKhvErmTREw==}
@@ -1824,6 +1821,32 @@ packages:
     resolution: {integrity: sha512-WFaiCVbBd39FK6Bx3GQskhgT9s45Vjx6dRQegYheVwU1AnF+FAfJVgWbrl21p6fRJcLAFp0xDz6wE18JYBM0eQ==}
     peerDependencies:
       vue: '>=3.5.13'
+
+  '@vercel/analytics@1.5.0':
+    resolution: {integrity: sha512-MYsBzfPki4gthY5HnYN7jgInhAZ7Ac1cYDoRWFomwGHWEX7odTEzbtg9kf/QSo7XEsEAqlQugA6gJ2WS2DEa3g==}
+    peerDependencies:
+      '@remix-run/react': ^2
+      '@sveltejs/kit': ^1 || ^2
+      next: '>= 13'
+      react: ^18 || ^19 || ^19.0.0-rc
+      svelte: '>= 4'
+      vue: ^3
+      vue-router: ^4
+    peerDependenciesMeta:
+      '@remix-run/react':
+        optional: true
+      '@sveltejs/kit':
+        optional: true
+      next:
+        optional: true
+      react:
+        optional: true
+      svelte:
+        optional: true
+      vue:
+        optional: true
+      vue-router:
+        optional: true
 
   '@vercel/nft@0.29.4':
     resolution: {integrity: sha512-6lLqMNX3TuycBPABycx7A9F1bHQR7kiQln6abjFbPrf5C/05qHM9M5E4PeTE59c7z8g6vHnx1Ioihb2AQl7BTA==}
@@ -5830,12 +5853,6 @@ snapshots:
       '@phc/format': 1.0.0
       '@poppinss/utils': 6.10.0
 
-  '@ai-sdk/gateway@1.0.0-beta.5(zod@3.25.76)':
-    dependencies:
-      '@ai-sdk/provider': 2.0.0-beta.1
-      '@ai-sdk/provider-utils': 3.0.0-beta.2(zod@3.25.76)
-      zod: 3.25.76
-
   '@ai-sdk/gateway@1.0.0-beta.6(zod@3.25.76)':
     dependencies:
       '@ai-sdk/provider': 2.0.0-beta.1
@@ -7857,6 +7874,11 @@ snapshots:
       hookable: 5.5.3
       unhead: 2.0.12
       vue: 3.5.17(typescript@5.8.3)
+
+  '@vercel/analytics@1.5.0(vue-router@4.5.1(vue@3.5.17(typescript@5.8.3)))(vue@3.5.17(typescript@5.8.3))':
+    optionalDependencies:
+      vue: 3.5.17(typescript@5.8.3)
+      vue-router: 4.5.1(vue@3.5.17(typescript@5.8.3))
 
   '@vercel/nft@0.29.4(rollup@4.45.0)':
     dependencies:
