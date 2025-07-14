@@ -21,7 +21,7 @@
     "@ai-sdk/vue": "2.0.0-beta.17",
     "@iconify-json/logos": "^1.2.4",
     "@iconify-json/lucide": "^1.2.57",
-    "@iconify-json/simple-icons": "^1.2.42",
+    "@iconify-json/simple-icons": "^1.2.43",
     "@nuxt/ui-pro": "^3.2.0",
     "@nuxtjs/mdc": "^0.17.0",
     "@vercel/analytics": "^1.5.0",
