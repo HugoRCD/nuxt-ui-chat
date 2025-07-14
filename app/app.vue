@@ -40,7 +40,7 @@ defineShortcuts({
 </script>
 
 <template>
-  <UApp :toaster="{ position: 'top-center', expand: false, duration: 0 }" :tooltip="{ delayDuration: 0 }">
+  <UApp :toaster="{ position: 'top-center', expand: false }" :tooltip="{ delayDuration: 0 }">
     <Analytics />
     <NuxtLoadingIndicator color="var(--ui-primary)" />
 
