@@ -3,7 +3,6 @@ const input = ref('')
 const loading = ref(false)
 
 const { model } = useLLM()
-
 const { loggedIn } = useUserSession()
 
 const canUseModel = computed(() => {
@@ -79,24 +78,12 @@ const quickChats = [
           </h1>
         </div>
 
-        <UChatPrompt
+        <ChatPrompt
           v-model="input"
+          mode="index"
           :status="loading ? 'streaming' : 'ready'"
-          :disabled="!canUseModel"
-          class="[view-transition-name:chat-prompt]"
-          variant="subtle"
           @submit="onSubmit"
-        >
-          <UChatPromptSubmit color="neutral" :disabled="!canUseModel" />
-
-          <template #footer>
-            <ModelSelect v-model="model" />
-            <div v-if="!canUseModel" class="text-xs sm:text-sm flex items-center gap-2 text-red-500">
-              <UIcon name="i-lucide-alert-triangle" class="size-4 shrink-0" />
-              <span>You need to be logged in to use reasoning models</span>
-            </div>
-          </template>
-        </UChatPrompt>
+        />
 
         <div class="flex flex-wrap gap-2 justify-center">
           <UButton
@@ -104,6 +91,7 @@ const quickChats = [
             :key="quickChat.label"
             :icon="quickChat.icon"
             :label="quickChat.label"
+            :disabled="!canUseModel"
             size="sm"
             color="neutral"
             variant="outline"

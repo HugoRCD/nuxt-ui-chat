@@ -133,7 +133,7 @@ pnpm lint
 TODO:
 - [x] Basic rate limit
 - [ ] Better rate limit handling
-- [ ] Better rate limit handling in the UI (display)
+- [x] Better rate limit handling in the UI (display)
 - [ ] Web search with sources display
 - [ ] Abort streaming
 - [ ] Resume streaming on page reload

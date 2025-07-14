@@ -28,6 +28,7 @@
     "ai": "5.0.0-beta.16",
     "date-fns": "^4.1.0",
     "drizzle-orm": "^0.44.2",
+    "motion-v": "^1.5.0",
     "nuxt": "^3.17.7",
     "nuxt-auth-utils": "^0.5.20",
     "pg": "^8.16.3",

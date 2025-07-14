@@ -4,7 +4,8 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/ui-pro',
     '@nuxtjs/mdc',
-    'nuxt-auth-utils'
+    'nuxt-auth-utils',
+    'motion-v/nuxt'
   ],
 
   devtools: {

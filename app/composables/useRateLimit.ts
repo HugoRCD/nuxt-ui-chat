@@ -1,7 +1,7 @@
 export function useRateLimit() {
-  const remaining = ref(RATE_LIMIT_DAILY_LIMIT)
-  const used = ref(0)
-  const limit = ref(RATE_LIMIT_DAILY_LIMIT)
+  const remaining = useState('remaining', () => RATE_LIMIT_DAILY_LIMIT)
+  const used = useState('used', () => 0)
+  const limit = useState('limit', () => RATE_LIMIT_DAILY_LIMIT)
   const toast = useToast()
 
   const handleRateLimitError = () => {

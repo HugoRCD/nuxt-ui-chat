@@ -8,6 +8,7 @@ const { model, models } = useLLM()
     :items="models"
     variant="ghost"
     :icon="model.icon"
+    size="sm"
     class="hover:bg-default focus:bg-default data-[state=open]:bg-default"
     :ui="{
       content: 'min-w-fit',

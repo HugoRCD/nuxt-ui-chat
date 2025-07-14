@@ -10,12 +10,8 @@ const components = {
   pre: ProseStreamPre as unknown as DefineComponent
 }
 
-const { user, loggedIn } = useUserSession()
+const { user } = useUserSession()
 const { handleRateLimitError } = useRateLimit()
-
-const canUseModel = computed(() => {
-  return !model.value.reasoning || (model.value.reasoning && loggedIn.value)
-})
 
 const route = useRoute()
 const clipboard = useClipboard()
@@ -107,7 +103,7 @@ const handleSubmit = (e: Event) => {
             },
             actions: [
               {
-                abel: 'Copy',
+                label: 'Copy',
                 icon: copied ? 'i-lucide-copy-check' : 'i-lucide-copy',
                 onClick: copy
               }
@@ -160,30 +156,15 @@ const handleSubmit = (e: Event) => {
           </template>
         </UChatMessages>
 
-        <UChatPrompt
+        <ChatPrompt
           v-model="input"
+          mode="chat"
           :error="chat.error"
-          :disabled="!canUseModel"
-          variant="subtle"
-          class="sticky bottom-4 [view-transition-name:chat-prompt] z-10"
+          :status="chat.status"
+          :on-stop="chat.stop"
+          :on-reload="chat.regenerate"
           @submit="handleSubmit"
-        >
-          <UChatPromptSubmit
-            :status="chat.status"
-            color="neutral"
-            :disabled="!canUseModel"
-            @stop="chat.stop"
-            @reload="chat.regenerate"
-          />
-
-          <template #footer>
-            <ModelSelect v-model="model" />
-            <div v-if="!canUseModel" class="text-xs sm:text-sm flex items-center gap-2 text-red-500">
-              <UIcon name="i-lucide-alert-triangle" class="size-4 shrink-0" />
-              <span>You need to be logged in to use reasoning models</span>
-            </div>
-          </template>
-        </UChatPrompt>
+        />
       </UContainer>
     </template>
   </UDashboardPanel>

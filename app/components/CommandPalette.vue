@@ -106,7 +106,7 @@ defineShortcuts({
     v-model:open="open"
     :ui="modalUi"
   >
-    <UTooltip text="Search Chats">
+    <UTooltip text="Browse Chats">
       <UButton icon="i-lucide-text-search" variant="ghost" />
     </UTooltip>
     <template #content>
