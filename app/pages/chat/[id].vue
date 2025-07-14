@@ -96,9 +96,11 @@ const handleSubmit = (e: Event) => {
           }))"
           :status="chat.status"
           :user="{
-            avatar: {
+            avatar: user ? {
               src: user?.avatar,
               alt: user?.username
+            } : {
+              icon: 'i-lucide-user'
             }
           }"
           :assistant="{
