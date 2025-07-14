@@ -1,3 +1,5 @@
+![Nuxt UI Chat](public/banner.png)
+
 # Nuxt UI Chat
 
 A modern, full-featured AI chatbot application built with Nuxt 3, Nuxt UI Pro, and the Vercel AI SDK v5. Features real-time streaming, multiple AI models support via AI Gateway, persistent chat history with PostgreSQL, and a beautiful responsive interface.

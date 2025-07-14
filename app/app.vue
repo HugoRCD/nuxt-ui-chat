@@ -27,8 +27,8 @@ useSeoMeta({
   description,
   ogTitle: title,
   ogDescription: description,
-  ogImage: 'https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2NoYXQtdGVtcGxhdGUubnV4dC5kZXYiLCJpYXQiOjE3NDI4NDY2ODB9.n4YCsoNz8xatox7UMoYZFNo7iS1mC_DT0h0A9cKRoTw.jpg?theme=light',
-  twitterImage: 'https://assets.hub.nuxt.com/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJodHRwczovL2NoYXQtdGVtcGxhdGUubnV4dC5kZXYiLCJpYXQiOjE3NDI4NDY2ODB9.n4YCsoNz8xatox7UMoYZFNo7iS1mC_DT0h0A9cKRoTw.jpg?theme=light',
+  ogImage: 'https://nuxt-ui-chat.hrcd.fr/og.png',
+  twitterImage: 'https://nuxt-ui-chat.hrcd.fr/og.png',
   twitterCard: 'summary_large_image'
 })
 
@@ -40,7 +40,7 @@ defineShortcuts({
 </script>
 
 <template>
-  <UApp :toaster="{ position: 'top-center', expand: false }">
+  <UApp :toaster="{ position: 'top-center', expand: false, duration: 0 }" :tooltip="{ delayDuration: 0 }">
     <Analytics />
     <NuxtLoadingIndicator color="var(--ui-primary)" />
 
