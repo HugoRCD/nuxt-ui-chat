@@ -1,22 +1,13 @@
 # Nuxt UI Chat
 
-TODO:
-- [x] Basic rate limit
-- [ ] Better rate limit handling
-- [ ] Better rate limit handling in the UI (display)
-- [ ] Web search with sources display
-- [ ] Abort streaming
-- [ ] Resume streaming on page reload
-- [ ] Image generation
-- [ ] Add image to message
-- [ ] Change model during conversation
-
-A modern, full-featured AI chatbot application built with Nuxt 3, Nuxt UI Pro, and the Vercel AI SDK. Features real-time streaming, multiple AI models support via AI Gateway, persistent chat history with PostgreSQL, and a beautiful responsive interface.
+A modern, full-featured AI chatbot application built with Nuxt 3, Nuxt UI Pro, and the Vercel AI SDK v5. Features real-time streaming, multiple AI models support via AI Gateway, persistent chat history with PostgreSQL, and a beautiful responsive interface.
 
 ## Features
 
-- ⚡️ **Streaming AI responses** powered by [Vercel AI SDK](https://sdk.vercel.ai)
-- 🤖 **Multiple AI models** support via [Vercel AI Gateway](https://vercel.com/docs/ai/ai-gateway) - access OpenAI, Anthropic, Google, and more
+- ⚡️ **Streaming AI responses** powered by [Vercel AI SDK v5](https://ai-sdk.dev)
+- 🤖 **Multiple AI models** support via [Vercel AI Gateway](https://vercel.com/docs/ai-gateway) - access OpenAI, Anthropic, Google, and more
+- 🧠 **Reasoning models** support for advanced problem-solving capabilities
+- 🧩 **Generative UI** - AI can generate interactive components (e.g., weather widgets)
 - 🔐 **GitHub authentication** via [nuxt-auth-utils](https://github.com/atinux/nuxt-auth-utils)
 - 💾 **Persistent chat history** with PostgreSQL and [Drizzle ORM](https://orm.drizzle.team)
 - 🎨 **Beautiful UI** built with [Nuxt UI Pro](https://ui.nuxt.com/pro) components
@@ -28,7 +19,7 @@ A modern, full-featured AI chatbot application built with Nuxt 3, Nuxt UI Pro, a
 ## Tech Stack
 
 - **Frontend**: Nuxt, Nuxt UI Pro, TailwindCSS
-- **AI**: Vercel AI SDK, Vercel AI Gateway
+- **AI**: Vercel AI SDK v5, Vercel AI Gateway
 - **Database**: PostgreSQL with Drizzle ORM
 - **Authentication**: GitHub OAuth via nuxt-auth-utils
 - **Deployment**: Vercel (recommended)
@@ -79,7 +70,7 @@ pnpm db:migrate
 
 For better analytics, caching, and cost optimization:
 
-1. Create a [Vercel AI Gateway](https://vercel.com/docs/ai/ai-gateway)
+1. Create a [Vercel AI Gateway](https://ai-sdk.dev/docs/ai-gateway)
 2. Add the API key to `AI_GATEWAY_API_KEY`
 
 ## Development
@@ -120,7 +111,6 @@ pnpm preview
 This app can be deployed on any platform that supports Node.js and PostgreSQL:
 
 - Railway
-- Render
 - DigitalOcean App Platform
 - Self-hosted with Docker
 
@@ -140,9 +130,20 @@ pnpm typecheck
 pnpm lint
 ```
 
+TODO:
+- [x] Basic rate limit
+- [ ] Better rate limit handling
+- [ ] Better rate limit handling in the UI (display)
+- [ ] Web search with sources display
+- [ ] Abort streaming
+- [ ] Resume streaming on page reload
+- [ ] Image generation
+- [ ] Add image to message
+- [ ] Change model during conversation
+
 ## License
 
-This project requires a [Nuxt UI Pro license](https://ui.nuxt.com/getting-started/license) for production use.
+This project requires a [Nuxt UI Pro license](https://ui.nuxt.com/pro) for production use.
 
 ## Contributing
 
