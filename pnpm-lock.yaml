@@ -12,8 +12,8 @@ importers:
   .:
     dependencies:
       '@ai-sdk/gateway':
-        specifier: 1.0.0-beta.6
-        version: 1.0.0-beta.6(zod@3.25.76)
+        specifier: 1.0.0-beta.7
+        version: 1.0.0-beta.7(zod@3.25.76)
       '@ai-sdk/vue':
         specifier: 2.0.0-beta.17
         version: 2.0.0-beta.17(vue@3.5.17(typescript@5.8.3))(zod@3.25.76)
@@ -95,6 +95,12 @@ packages:
 
   '@ai-sdk/gateway@1.0.0-beta.6':
     resolution: {integrity: sha512-zNsJm+kT6kEA5MLDgIhvHijzD8tlBabEwtyy09wVu/KmQ0V6OAPfRHfnSyiiYH/fGNRYmq6OhSOtKhvErmTREw==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.25.49
+
+  '@ai-sdk/gateway@1.0.0-beta.7':
+    resolution: {integrity: sha512-0TOWFetxYximugqdmA/uxk+NRkz51Lyo+anntc3hPzm2OnsbE/Q2wWkKJ14YzoCAfWZ9ZhvxsJRp8xzvvQREsA==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.25.49
@@ -5857,6 +5863,12 @@ snapshots:
       '@poppinss/utils': 6.10.0
 
   '@ai-sdk/gateway@1.0.0-beta.6(zod@3.25.76)':
+    dependencies:
+      '@ai-sdk/provider': 2.0.0-beta.1
+      '@ai-sdk/provider-utils': 3.0.0-beta.2(zod@3.25.76)
+      zod: 3.25.76
+
+  '@ai-sdk/gateway@1.0.0-beta.7(zod@3.25.76)':
     dependencies:
       '@ai-sdk/provider': 2.0.0-beta.1
       '@ai-sdk/provider-utils': 3.0.0-beta.2(zod@3.25.76)
