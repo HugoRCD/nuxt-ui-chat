@@ -71,7 +71,7 @@ const items = computed<DropdownMenuItem[][]>(() => ([[{
   <UDropdownMenu
     :items="items"
     :content="{ align: 'center', collisionPadding: 12 }"
-    :ui="{ content: collapsed ? 'w-48' : 'w-(--reka-dropdown-menu-trigger-width)' }"
+    :ui="{ content: 'w-(--reka-dropdown-menu-trigger-width)' }"
   >
     <UButton
       v-bind="{
@@ -84,6 +84,7 @@ const items = computed<DropdownMenuItem[][]>(() => ([[{
       }"
       color="neutral"
       variant="ghost"
+      size="md"
       block
       :square="collapsed"
       class="data-[state=open]:bg-elevated"
@@ -91,15 +92,5 @@ const items = computed<DropdownMenuItem[][]>(() => ([[{
         trailingIcon: 'text-dimmed'
       }"
     />
-
-    <template #chip-leading="{ item }">
-      <span
-        :style="{
-          '--color-light': `var(--color-${(item as any).chip}-500)`,
-          '--color-dark': `var(--color-${(item as any).chip}-400)`
-        }"
-        class="ms-0.5 size-2 rounded-full bg-(--color-light) dark:bg-(--color-dark)"
-      />
-    </template>
   </UDropdownMenu>
 </template>

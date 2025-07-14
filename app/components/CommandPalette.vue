@@ -106,9 +106,13 @@ defineShortcuts({
     v-model:open="open"
     :ui="modalUi"
   >
-    <UTooltip text="Browse Chats">
-      <UButton icon="i-lucide-text-search" variant="ghost" />
-    </UTooltip>
+    <UButton
+      icon="i-lucide-text-search"
+      variant="ghost"
+      label="Browse Chats"
+      size="sm"
+      :ui="{ label: 'hidden sm:block' }"
+    />
     <template #content>
       <UCommandPalette
         :groups

@@ -46,20 +46,8 @@ const quickChats = [
     icon: 'i-logos-nuxt-icon'
   },
   {
-    label: 'Help me create a Vue composable',
-    icon: 'i-logos-vue'
-  },
-  {
-    label: 'Tell me more about UnJS',
-    icon: 'i-logos-unjs'
-  },
-  {
-    label: 'Why should I consider VueUse?',
-    icon: 'i-logos-vueuse'
-  },
-  {
-    label: 'Tailwind CSS best practices',
-    icon: 'i-logos-tailwindcss-icon'
+    label: 'What is the capital of France?',
+    icon: 'i-lucide-map-pin'
   }
 ]
 </script>
@@ -71,12 +59,14 @@ const quickChats = [
     </template>
 
     <template #body>
-      <UContainer class="flex-1 flex flex-col justify-center items-center gap-4 sm:gap-6 py-8">
-        <div class="flex flex-col items-center gap-2">
-          <UIcon name="i-lucide-sparkles" class="size-12 text-highlighted" />
-          <h1 class="text-3xl sm:text-4xl text-highlighted font-bold">
+      <UContainer class="flex-1 flex flex-col justify-center gap-4 sm:gap-6 py-8">
+        <div class="flex flex-col gap-1">
+          <span class="text-2xl sm:text-3xl text-highlighted font-medium">
+            Welcome
+          </span>
+          <span class="text-3xl sm:text-4xl bg-gradient-to-r from-inverted/40 to-inverted/75 to-50% bg-clip-text text-transparent font-medium">
             How can I help you today?
-          </h1>
+          </span>
         </div>
 
         <ChatPrompt
@@ -96,11 +86,12 @@ const quickChats = [
             size="sm"
             color="neutral"
             variant="outline"
-            class="rounded-full"
+            class="rounded-full grayscale"
             @click="createChat(quickChat.label)"
           />
         </div>
       </UContainer>
+      <StarsBg class="opacity-30 hidden dark:block" />
     </template>
   </UDashboardPanel>
 </template>
