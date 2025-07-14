@@ -11,7 +11,7 @@ const components = {
 }
 
 const { user } = useUserSession()
-const { handleRateLimitError } = useRateLimit()
+const { handleRateLimitError, incrementUsage } = useRateLimit()
 
 const route = useRoute()
 const clipboard = useClipboard()
@@ -38,6 +38,10 @@ const chat = new Chat({
   maxSteps: 5,
   onFinish() {
     refreshNuxtData('chats')
+
+    if (isReasoningModel(model.value.value)) {
+      incrementUsage()
+    }
   },
   onError: (error) => {
     if (error.message?.includes('Rate limit exceeded') || error.message?.includes('429')) {

@@ -4,6 +4,7 @@ const loading = ref(false)
 
 const { model } = useLLM()
 const { loggedIn } = useUserSession()
+const { isRateLimited } = useRateLimit()
 
 const canUseModel = computed(() => {
   return !model.value.reasoning || (model.value.reasoning && loggedIn.value)
@@ -91,7 +92,7 @@ const quickChats = [
             :key="quickChat.label"
             :icon="quickChat.icon"
             :label="quickChat.label"
-            :disabled="!canUseModel"
+            :disabled="!canUseModel || isRateLimited"
             size="sm"
             color="neutral"
             variant="outline"
