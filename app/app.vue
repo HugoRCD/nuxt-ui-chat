@@ -27,8 +27,8 @@ useSeoMeta({
   description,
   ogTitle: title,
   ogDescription: description,
-  ogImage: 'https://nuxt-ui-chat.hrcd.fr/og.png',
-  twitterImage: 'https://nuxt-ui-chat.hrcd.fr/og.png',
+  ogImage: 'https://nuxt-ui-chat.hrcd.fr/og.jpg',
+  twitterImage: 'https://nuxt-ui-chat.hrcd.fr/og.jpg',
   twitterCard: 'summary_large_image'
 })
 

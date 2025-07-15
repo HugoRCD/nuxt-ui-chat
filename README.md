@@ -1,4 +1,4 @@
-![Nuxt UI Chat](public/banner.png)
+![Nuxt UI Chat](public/banner.jpg)
 
 # Nuxt UI Chat
 
