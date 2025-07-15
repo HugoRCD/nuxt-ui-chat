@@ -21,6 +21,12 @@ export default defineNuxtConfig({
     }
   },
 
+  routeRules: {
+    '/': {
+      prerender: true
+    }
+  },
+
   future: {
     compatibilityVersion: 4
   },
