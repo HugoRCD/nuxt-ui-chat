@@ -92,7 +92,8 @@ const handleSubmit = (e: Event) => {
         <UChatMessages
           :messages="chat.messages.map(message => ({
             ...message,
-            content: '' // FIXME: This is a hack to make the UChatMessages component work with aiSDK v5
+            content: '', // FIXME: This is a hack to make the UChatMessages component work with aiSDK v5
+            createdAt: new Date(message.createdAt) // FIXME: aiSDK v5 Type is a string instead of expected Date
           }))"
           :status="chat.status"
           :user="{
@@ -111,7 +112,7 @@ const handleSubmit = (e: Event) => {
               {
                 label: 'Copy',
                 icon: copied ? 'i-lucide-copy-check' : 'i-lucide-copy',
-                onClick: copy
+                onClick: (e, message) => copy(e, message as UIMessage)
               }
             ]
           }"
