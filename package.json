@@ -17,15 +17,15 @@
     "db:push": "drizzle-kit push"
   },
   "dependencies": {
-    "@ai-sdk/gateway": "1.0.0-beta.15",
-    "@ai-sdk/vue": "2.0.0-beta.17",
+    "@ai-sdk/gateway": "^1.0.0",
+    "@ai-sdk/vue": "^2.0.2",
     "@iconify-json/logos": "^1.2.5",
     "@iconify-json/lucide": "^1.2.58",
     "@iconify-json/simple-icons": "^1.2.44",
     "@nuxt/ui-pro": "^3.3.0",
     "@nuxtjs/mdc": "^0.17.2",
     "@vercel/analytics": "^1.5.0",
-    "ai": "5.0.0-beta.16",
+    "ai": "^5.0.2",
     "date-fns": "^4.1.0",
     "drizzle-orm": "^0.44.3",
     "motion-v": "^1.6.1",

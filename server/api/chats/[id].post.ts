@@ -7,6 +7,7 @@ import {
   stepCountIs
 } from 'ai'
 import { gateway } from '@ai-sdk/gateway'
+import { openai } from '@ai-sdk/openai'
 import type { UIMessage } from 'ai'
 import { z } from 'zod'
 
