@@ -30,7 +30,7 @@
     "date-fns": "^4.1.0",
     "drizzle-orm": "^0.44.4",
     "motion-v": "^1.7.0",
-    "nuxt": "^4.0.2",
+    "nuxt": "^4.0.3",
     "nuxt-auth-utils": "^0.5.22",
     "pg": "^8.16.3",
     "shiki-stream": "^0.1.2"
