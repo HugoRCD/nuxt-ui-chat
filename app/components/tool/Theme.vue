@@ -6,12 +6,6 @@ const { state, output } = defineProps<{
 
 const colorMode = useColorMode()
 
-function applyTheme() {
-  if (output?.mode) {
-    colorMode.preference = output.mode
-  }
-}
-
 const isDark = computed({
   get: () => colorMode.value === 'dark',
   set: (val: boolean) => {
