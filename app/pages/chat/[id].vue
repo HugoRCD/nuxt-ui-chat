@@ -5,6 +5,7 @@ import { DefaultChatTransport } from 'ai'
 import type { UIMessage } from 'ai'
 import { useClipboard } from '@vueuse/core'
 import ProseStreamPre from '../../components/prose/PreStream.vue'
+import type { ThemeToolUIPart } from '../../../shared/utils/tools/theme'
 
 const components = {
   pre: ProseStreamPre as unknown as DefineComponent
@@ -35,7 +36,6 @@ const chat = new Chat({
       model: model.value.value
     }
   }),
-  maxSteps: 5,
   onFinish() {
     refreshNuxtData('chats')
 
@@ -147,6 +147,7 @@ const handleSubmit = (e: Event) => {
               />
               <template v-for="(part, index) in message.parts as UIMessage['parts']" :key="`${part.type}-${index}-${message.id}`">
                 <ToolWeather v-if="part.type === 'tool-weather'" :state="part.state as WeatherToolUIPart['state']" :output="part.output as WeatherToolUIPart['output']" />
+                <ToolTheme v-if="part.type === 'tool-theme'" :state="part.state as ThemeToolUIPart['state']" :output="part.output as ThemeToolUIPart['output']" />
               </template>
             </div>
           </template>

@@ -48,6 +48,10 @@ const quickChats = [
   {
     label: 'What is the capital of France?',
     icon: 'i-lucide-map-pin'
+  },
+  {
+    label: 'How to change the theme of the app?',
+    icon: 'i-lucide-sun'
   }
 ]
 </script>
