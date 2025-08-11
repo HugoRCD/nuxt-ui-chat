@@ -88,27 +88,27 @@ function handleSubmit(event: Event) {
         @submit="handleSubmit"
       >
         <template #footer>
-          <UTooltip text="Soon available">
-            <UButton
-              icon="i-lucide-paperclip"
-              color="neutral"
-              size="sm"
-              variant="ghost"
-              disabled
-            />
-          </UTooltip>
           <div class="flex items-center gap-1">
+            <UTooltip text="Soon available">
+              <UButton
+                icon="i-lucide-paperclip"
+                color="neutral"
+                size="sm"
+                variant="ghost"
+                disabled
+              />
+            </UTooltip>
             <ModelSelect v-model="model" />
-            <UChatPromptSubmit
-              :status="computedStatus"
-              color="neutral"
-              size="sm"
-              :label="computedStatus === 'streaming' || computedStatus === 'submitted' ? 'Stop' : undefined"
-              :disabled="disabled || !canUseModel || isRateLimited"
-              @stop="onStop"
-              @reload="onReload"
-            />
           </div>
+          <UChatPromptSubmit
+            :status="computedStatus"
+            color="neutral"
+            size="sm"
+            :label="computedStatus === 'streaming' || computedStatus === 'submitted' ? 'Stop' : undefined"
+            :disabled="disabled || !canUseModel || isRateLimited"
+            @stop="onStop"
+            @reload="onReload"
+          />
         </template>
       </UChatPrompt>
     </motion.div>
