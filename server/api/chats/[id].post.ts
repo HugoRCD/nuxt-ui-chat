@@ -64,7 +64,12 @@ export default defineEventHandler(async (event) => {
     execute: ({ writer }) => {
       const result = streamText({
         model: gateway(model),
-        system: 'You are a helpful assistant that can answer questions and help.',
+        system: `You are a helpful assistant. Be proactive and slightly more descriptive (avoid being overly concise):
+          - When the user mentions dark mode, light mode, appearance, theme, or "mode" for the app, show the "theme" tool UI part so the user can toggle the theme himself directly.
+            And explain how to change the theme manually via the UI with clear, visual steps:
+               Top navbar → click your profile avatar/name → Appearance → choose Light (sun icon) or Dark (moon icon).
+          - Prefer 2–4 short paragraphs with friendly, visual language when giving instructions.
+          - Keep code blocks to a minimum, focus on UI guidance.`,
         messages: convertToModelMessages(messages),
         experimental_transform: smoothStream({ chunking: 'word' }),
         stopWhen: stepCountIs(5),
@@ -72,14 +77,15 @@ export default defineEventHandler(async (event) => {
           google: {
             thinkingConfig: reasoningModel
               ? {
-                  includeThoughts: true,
-                  thinkingBudget: 2048
-                }
+                includeThoughts: true,
+                thinkingBudget: 2048
+              }
               : {}
           }
         },
         tools: {
-          weather: weatherTool
+          weather: weatherTool,
+          theme: themeTool
         }
       })
 

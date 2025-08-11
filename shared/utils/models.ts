@@ -2,16 +2,16 @@ import type { SelectMenuItem } from '@nuxt/ui'
 
 export const MODELS = [
   {
-    label: 'GPT-4.1 Mini',
+    label: 'GPT-5 Mini',
     icon: 'i-simple-icons:openai',
     company: 'OpenAI',
-    value: 'openai/gpt-4.1-mini'
+    value: 'openai/gpt-5-mini'
   },
   {
-    label: 'GPT-4.1 Nano',
+    label: 'GPT-5 Nano',
     icon: 'i-simple-icons:openai',
     company: 'OpenAI',
-    value: 'openai/gpt-4.1-nano'
+    value: 'openai/gpt-5-nano'
   },
   {
     label: 'Gemini 2.0 Flash',
