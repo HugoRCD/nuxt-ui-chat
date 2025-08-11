@@ -3,7 +3,6 @@ import {
   convertToModelMessages,
   createUIMessageStream,
   createUIMessageStreamResponse,
-  smoothStream,
   stepCountIs
 } from 'ai'
 import { gateway } from '@ai-sdk/gateway'
@@ -64,14 +63,12 @@ export default defineEventHandler(async (event) => {
     execute: ({ writer }) => {
       const result = streamText({
         model: gateway(model),
-        system: `You are a helpful assistant. Be proactive and slightly more descriptive (avoid being overly concise):
-          - When the user mentions dark mode, light mode, appearance, theme, or "mode" for the app, show the "theme" tool UI part so the user can toggle the theme himself directly.
-            And explain how to change the theme manually via the UI with clear, visual steps:
-               Top navbar → click your profile avatar/name → Appearance → choose Light (sun icon) or Dark (moon icon).
-          - Prefer 2–4 short paragraphs with friendly, visual language when giving instructions.
-          - Keep code blocks to a minimum, focus on UI guidance.`,
+        system: `You are a helpful assistant. Be proactive, natural, and friendly.
+          - Important: Do NOT claim you changed the theme. You cannot change client UI state.
+          - Priority: when the user requests help with dark mode, light mode, appearance, theme, or "mode", render the "theme" tool UI part so the user can toggle the theme directly.
+          - Also provide a brief, friendly and structured / visual guide to change it manually: Top navbar → click your profile avatar/name → Appearance → choose Light (sun icon) or Dark (moon icon).
+          - Keep it concise and conversational; avoid saying "I toggled it".`,
         messages: convertToModelMessages(messages),
-        experimental_transform: smoothStream({ chunking: 'word' }),
         stopWhen: stepCountIs(5),
         providerOptions: {
           google: {

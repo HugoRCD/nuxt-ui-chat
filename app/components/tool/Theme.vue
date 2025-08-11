@@ -18,7 +18,7 @@ const isDark = computed({
   <div v-if="state === 'output-available' || state === 'input-available'" class="w-[480px] rounded-xl px-5 py-4 bg-muted/50 text-highlighted border border-default/30 shadow">
     <div class="flex items-center justify-between gap-3">
       <div class="flex items-center gap-2">
-        <UIcon :name="(output?.mode ?? colorMode.value) === 'dark' ? 'i-lucide-moon' : 'i-lucide-sun'" class="size-5" />
+        <UIcon :name="colorMode.value === 'dark' ? 'i-lucide-moon' : 'i-lucide-sun'" class="size-5" />
         <div class="text-sm">
           {{ output?.message || 'Switch theme?' }}
         </div>

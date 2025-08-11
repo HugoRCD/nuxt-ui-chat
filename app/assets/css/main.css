@@ -1,10 +1,24 @@
 @import "tailwindcss";
-@import "@nuxt/ui-pro";
+@import "@nuxt/ui";
 @import "./scrollbar.css";
 
 @theme {
   --font-sans: 'Geist', sans-serif;
   --font-mono: 'Geist Mono', monospace;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100%
+  }
+
+  to {
+    background-position: -50%
+  }
+}
+
+.group\/elements:hover .group-hover\/elements\:animate-shimmer-once {
+  animation: shimmer 1s ease-in-out forwards
 }
 
 :root {
