@@ -6,6 +6,7 @@ import type { UIMessage } from 'ai'
 import { useClipboard } from '@vueuse/core'
 import ProseStreamPre from '../../components/prose/PreStream.vue'
 import type { ThemeToolUIPart } from '../../../shared/utils/tools/theme'
+import { getTextFromMessage } from '@nuxt/ui/utils/ai'
 
 const components = {
   pre: ProseStreamPre as unknown as DefineComponent
@@ -90,11 +91,7 @@ const handleSubmit = (e: Event) => {
     <template #body>
       <UContainer class="flex-1 flex flex-col gap-4 sm:gap-6">
         <UChatMessages
-          :messages="chat.messages.map(message => ({
-            ...message,
-            content: '', // FIXME: This is a hack to make the UChatMessages component work with aiSDK v5
-            createdAt: new Date(message.createdAt) // FIXME: aiSDK v5 Type is a string instead of expected Date
-          }))"
+          :messages="chat.messages"
           :status="chat.status"
           :user="{
             avatar: user ? {
@@ -112,7 +109,7 @@ const handleSubmit = (e: Event) => {
               {
                 label: 'Copy',
                 icon: copied ? 'i-lucide-copy-check' : 'i-lucide-copy',
-                onClick: (e, message) => copy(e, message as UIMessage)
+                onClick: (e, message) => copy(e, message)
               }
             ]
           }"
@@ -135,17 +132,17 @@ const handleSubmit = (e: Event) => {
               <TextGradient text="Thinking..." />
             </UButton>
             <div class="space-y-4">
-              <template v-for="(part, index) in message.parts as UIMessage['parts']" :key="`${part.type}-${index}-${message.id}`">
+              <template v-for="(part, index) in message.parts" :key="`${part.type}-${index}-${message.id}`">
                 <Reasoning v-if="part.type === 'reasoning'" :state="part.state" :text="part.text" />
               </template>
               <MDCCached
-                :value="getTextFromMessage(message as UIMessage)"
+                :value="getTextFromMessage(message)"
                 :cache-key="message.id"
                 unwrap="p"
                 :components="components"
                 :parser-options="{ highlight: false }"
               />
-              <template v-for="(part, index) in message.parts as UIMessage['parts']" :key="`${part.type}-${index}-${message.id}`">
+              <template v-for="(part, index) in message.parts" :key="`${part.type}-${index}-${message.id}`">
                 <ToolWeather v-if="part.type === 'tool-weather'" :state="part.state as WeatherToolUIPart['state']" :output="part.output as WeatherToolUIPart['output']" />
                 <ToolTheme v-if="part.type === 'tool-theme'" :state="part.state as ThemeToolUIPart['state']" :output="part.output as ThemeToolUIPart['output']" />
               </template>

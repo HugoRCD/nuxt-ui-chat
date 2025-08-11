@@ -1,4 +1,3 @@
-export * from './parts'
 export * from './models'
 export * from './tools/weather'
 export * from './tools/theme'
