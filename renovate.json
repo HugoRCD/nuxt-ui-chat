@@ -1,15 +1,6 @@
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "github>nuxt/renovate-config-nuxt"
-  ],
-  "lockFileMaintenance": {
-    "enabled": true
-  },
-  "baseBranches": ["main"],
-  "packageRules": [{
-    "matchDepTypes": ["resolutions"],
-    "enabled": false
-  }],
-  "ignoreDeps": ["@ai-sdk/vue", "ai"],
-  "postUpdateOptions": ["pnpmDedupe"]
+    "local>HugoRCD/renovate-config"
+  ]
 }

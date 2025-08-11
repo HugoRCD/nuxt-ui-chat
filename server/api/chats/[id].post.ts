@@ -74,9 +74,9 @@ export default defineEventHandler(async (event) => {
           google: {
             thinkingConfig: reasoningModel
               ? {
-                includeThoughts: true,
-                thinkingBudget: 2048
-              }
+                  includeThoughts: true,
+                  thinkingBudget: 2048
+                }
               : {}
           }
         },
