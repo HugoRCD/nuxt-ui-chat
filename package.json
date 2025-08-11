@@ -20,9 +20,9 @@
   "dependencies": {
     "@ai-sdk/gateway": "^1.0.4",
     "@ai-sdk/vue": "^2.0.2",
-    "@iconify-json/logos": "^1.2.5",
-    "@iconify-json/lucide": "^1.2.61",
-    "@iconify-json/simple-icons": "^1.2.46",
+    "@iconify-json/logos": "^1.2.7",
+    "@iconify-json/lucide": "^1.2.62",
+    "@iconify-json/simple-icons": "^1.2.47",
     "@nuxt/ui-pro": "^3.3.0",
     "@nuxtjs/mdc": "^0.17.2",
     "@vercel/analytics": "^1.5.0",
