@@ -110,7 +110,6 @@ defineShortcuts({
       icon="i-lucide-text-search"
       variant="ghost"
       label="Browse Chats"
-      size="sm"
       :ui="{ label: 'hidden sm:block' }"
     />
     <template #content>

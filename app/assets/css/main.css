@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
-@import "./scrollbar.css";
 
 @theme {
   --font-sans: 'Geist', sans-serif;
@@ -10,9 +9,26 @@
 :root {
   --ui-container: var(--container-3xl);
   --ui-primary: black;
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--ui-bg-accented) transparent;
 }
 
 .dark {
   --ui-bg: #020202;
   --ui-primary: white;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100%
+  }
+
+  to {
+    background-position: -50%
+  }
+}
+
+.group\/shimmer:hover .group-hover\/shimmer\:animate-shimmer-once {
+  animation: shimmer 0.8s ease-in-out forwards
 }

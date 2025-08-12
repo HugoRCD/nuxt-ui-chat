@@ -5,6 +5,7 @@ const { model, models } = useLLM()
 <template>
   <USelectMenu
     v-model="model"
+    arrow
     :items="models"
     variant="ghost"
     :icon="model.icon"

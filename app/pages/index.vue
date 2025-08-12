@@ -63,7 +63,7 @@ const quickChats = [
     </template>
 
     <template #body>
-      <UContainer class="flex-1 flex flex-col justify-center gap-4 sm:gap-6 py-8">
+      <UContainer class="flex-1 flex flex-col justify-center gap-4 py-8">
         <div class="flex flex-col gap-1">
           <span class="text-2xl sm:text-3xl text-highlighted font-medium">
             Welcome
@@ -72,15 +72,7 @@ const quickChats = [
             How can I help you today?
           </span>
         </div>
-
-        <ChatPrompt
-          v-model="input"
-          mode="index"
-          :status="loading ? 'streaming' : 'ready'"
-          @submit="onSubmit"
-        />
-
-        <div class="flex flex-wrap gap-2 justify-center">
+        <div class="flex flex-wrap gap-2">
           <UButton
             v-for="quickChat in quickChats"
             :key="quickChat.label"
@@ -90,10 +82,29 @@ const quickChats = [
             size="sm"
             color="neutral"
             variant="outline"
-            class="rounded-full grayscale"
+            class="relative group/shimmer rounded-full"
+            :ui="{
+              leadingIcon: 'grayscale'
+            }"
             @click="createChat(quickChat.label)"
-          />
+          >
+            <span class="relative z-10 transition-colors duration-300 text-muted">
+              {{ quickChat.label }}
+              <span
+                class="absolute inset-0 bg-clip-text bg-inverted text-transparent opacity-0 group-hover/shimmer:opacity-100 group-hover/shimmer:animate-shimmer-once transition-opacity duration-200"
+                style="background-image:linear-gradient(90deg, transparent calc(50% - 40px), #12A594, #E93D82, #FFB224, transparent calc(50% + 40px));background-size:200% 100%;background-position:-50% center"
+              >
+                {{ quickChat.label }}
+              </span>
+            </span>
+          </UButton>
         </div>
+        <ChatPrompt
+          v-model="input"
+          mode="index"
+          :status="loading ? 'streaming' : 'ready'"
+          @submit="onSubmit"
+        />
       </UContainer>
       <StarsBg class="opacity-30 hidden dark:block" />
     </template>
