@@ -85,7 +85,6 @@ const items = computed<DropdownMenuItem[][]>(() => ([[{
       color="neutral"
       variant="ghost"
       size="md"
-      block
       :square="collapsed"
       class="data-[state=open]:bg-elevated"
       :ui="{

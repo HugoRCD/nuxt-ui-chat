@@ -34,7 +34,7 @@ const promptClasses = computed(() => {
   const baseClasses = '[view-transition-name:chat-prompt]'
 
   if (props.mode === 'chat') {
-    return `sticky bottom-4 ${baseClasses} z-10`
+    return `sticky bottom-2 ${baseClasses} z-10`
   }
 
   return baseClasses
@@ -58,7 +58,7 @@ function handleSubmit(event: Event) {
 <template>
   <motion.div
     :class="promptClasses"
-    class="w-full p-2 bg-neutral-50 dark:bg-neutral-950 rounded-xl space-y-2 border border-default/30 shadow-sm"
+    class="z-20 w-full p-2 bg-neutral-50 dark:bg-neutral-950 rounded-xl space-y-2 border border-default/30 shadow-sm"
     layout
   >
     <motion.div layout>

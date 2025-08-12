@@ -5,7 +5,6 @@ import { DefaultChatTransport } from 'ai'
 import type { UIMessage } from 'ai'
 import { useClipboard } from '@vueuse/core'
 import ProseStreamPre from '../../components/prose/PreStream.vue'
-import type { ThemeToolUIPart } from '../../../shared/utils/tools/theme'
 import { getTextFromMessage } from '@nuxt/ui/utils/ai'
 
 const components = {
@@ -23,7 +22,7 @@ const input = ref('')
 const { data } = await useFetch(`/api/chats/${route.params.id}`, {
   cache: 'force-cache'
 })
-console.log('data', data.value)
+
 if (!data.value) {
   throw createError({ statusCode: 404, statusMessage: 'Chat not found', fatal: true })
 }
@@ -81,14 +80,19 @@ const handleSubmit = (e: Event) => {
   chat.sendMessage({ text: input.value })
   input.value = ''
 }
+
+const scrollFader = ref()
+
+function handleScroll(event: Event) {
+  scrollFader.value?.handleScroll(event)
+}
 </script>
 
 <template>
-  <UDashboardPanel id="chat" class="relative" :ui="{ body: 'p-0 sm:p-0' }">
-    <template #header>
-      <DashboardNavbar />
-    </template>
-    <template #body>
+  <div class="relative flex-1 flex flex-col min-w-0 min-h-svh">
+    <DashboardNavbar />
+    <ScrollFader ref="scrollFader" />
+    <div class="flex flex-col gap-4 sm:gap-6 flex-1 overflow-y-auto" @scroll="handleScroll">
       <UContainer class="flex-1 flex flex-col gap-4 sm:gap-6">
         <UChatMessages
           :messages="chat.messages"
@@ -171,6 +175,6 @@ const handleSubmit = (e: Event) => {
           @submit="handleSubmit"
         />
       </UContainer>
-    </template>
-  </UDashboardPanel>
+    </div>
+  </div>
 </template>
