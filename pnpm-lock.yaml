@@ -12,11 +12,11 @@ importers:
   .:
     dependencies:
       '@ai-sdk/gateway':
-        specifier: ^1.0.4
-        version: 1.0.4(zod@3.25.76)
+        specifier: ^1.0.6
+        version: 1.0.6(zod@3.25.76)
       '@ai-sdk/vue':
-        specifier: ^2.0.2
-        version: 2.0.9(vue@3.5.18(typescript@5.9.2))(zod@3.25.76)
+        specifier: ^2.0.14
+        version: 2.0.14(vue@3.5.18(typescript@5.9.2))(zod@3.25.76)
       '@iconify-json/logos':
         specifier: ^1.2.9
         version: 1.2.9
@@ -36,8 +36,8 @@ importers:
         specifier: ^1.5.0
         version: 1.5.0(vue-router@4.5.1(vue@3.5.18(typescript@5.9.2)))(vue@3.5.18(typescript@5.9.2))
       ai:
-        specifier: ^5.0.2
-        version: 5.0.9(zod@3.25.76)
+        specifier: ^5.0.14
+        version: 5.0.14(zod@3.25.76)
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
@@ -93,14 +93,14 @@ packages:
       bcrypt:
         optional: true
 
-  '@ai-sdk/gateway@1.0.4':
-    resolution: {integrity: sha512-1roLdgMbFU3Nr4MC97/te7w6OqxsWBkDUkpbCcvxF3jz/ku91WVaJldn/PKU8feMKNyI5W9wnqhbjb1BqbExOQ==}
+  '@ai-sdk/gateway@1.0.6':
+    resolution: {integrity: sha512-JuSj1MtTr4vw2VBBth4wlbciQnQIV0o1YV9qGLFA+r85nR5H+cJp3jaYE0nprqfzC9rYG8w9c6XGHB3SDKgcgA==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.25.76 || ^4
 
-  '@ai-sdk/provider-utils@3.0.1':
-    resolution: {integrity: sha512-/iP1sKc6UdJgGH98OCly7sWJKv+J9G47PnTjIj40IJMUQKwDrUMyf7zOOfRtPwSuNifYhSoJQ4s1WltI65gJ/g==}
+  '@ai-sdk/provider-utils@3.0.3':
+    resolution: {integrity: sha512-kAxIw1nYmFW1g5TvE54ZB3eNtgZna0RnLjPUp1ltz1+t9xkXJIuDT4atrwfau9IbS0BOef38wqrI8CjFfQrxhw==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.25.76 || ^4
@@ -109,17 +109,8 @@ packages:
     resolution: {integrity: sha512-6o7Y2SeO9vFKB8lArHXehNuusnpddKPk7xqL7T2/b+OvXMRIXUO1rR4wcv1hAFUAT9avGZshty3Wlua/XA7TvA==}
     engines: {node: '>=18'}
 
-  '@ai-sdk/vue@2.0.10':
-    resolution: {integrity: sha512-gADM8uJeF/NNNb6YR4ApqGlLRLrBUYMywIFEcJRTqcKyz2olPg6HSlssWwbLbYx4xTuUpeBjy8VqjcyZvGgX9g==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      vue: ^3.3.4
-    peerDependenciesMeta:
-      vue:
-        optional: true
-
-  '@ai-sdk/vue@2.0.9':
-    resolution: {integrity: sha512-Wru2Tn9W4Nc7zxa0Jwoc+WeG1FUCT7wwd/RkDGADeTJ4ycN6NQ5eABXyclbrRTZ0hWNXLFfr/yHT+sudqwuWfw==}
+  '@ai-sdk/vue@2.0.14':
+    resolution: {integrity: sha512-ET/PC056UuUaRtpVSk3+LWkQAqTeQyNxn9pDCj3BETEJHLzbN2P/vtorbqPWNamW3sZtmEt6vhnvPS2/PUiTvQ==}
     engines: {node: '>=18'}
     peerDependencies:
       vue: ^3.3.4
@@ -2307,14 +2298,8 @@ packages:
     resolution: {integrity: sha512-MnA+YT8fwfJPgBx3m60MNqakm30XOkyIoH1y6huTQvC0PwZG7ki8NacLBcrPbNoo8vEZy7Jpuk7+jMO+CUovTQ==}
     engines: {node: '>= 14'}
 
-  ai@5.0.10:
-    resolution: {integrity: sha512-oPvaifsnHZzT3I07qI9jgWDOGpXDAFSXJ54rgpeHSq6qKQlQ3vwaCgQz861wb+5iJ/kk+B/qm3i5Yfghc/+XSw==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      zod: ^3.25.76 || ^4
-
-  ai@5.0.9:
-    resolution: {integrity: sha512-l7YdzsCTId7CDNNQ+roC0m4uDMmVIO9NpDC3bI2RxNDss3XpGIvsbHq7bT+IZzMYIqGbHK17HI0eiOOvtwzN6Q==}
+  ai@5.0.14:
+    resolution: {integrity: sha512-xiujFa879skB7YxGzbeHAxepsr6AEaWcHPXrc5a9MRM6p4WdVAwn6mGwVZkBnhqGfZtXFr4LUnU2ayvcjWp5ig==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.25.76 || ^4
@@ -6135,13 +6120,13 @@ snapshots:
       '@phc/format': 1.0.0
       '@poppinss/utils': 6.10.0
 
-  '@ai-sdk/gateway@1.0.4(zod@3.25.76)':
+  '@ai-sdk/gateway@1.0.6(zod@3.25.76)':
     dependencies:
       '@ai-sdk/provider': 2.0.0
-      '@ai-sdk/provider-utils': 3.0.1(zod@3.25.76)
+      '@ai-sdk/provider-utils': 3.0.3(zod@3.25.76)
       zod: 3.25.76
 
-  '@ai-sdk/provider-utils@3.0.1(zod@3.25.76)':
+  '@ai-sdk/provider-utils@3.0.3(zod@3.25.76)':
     dependencies:
       '@ai-sdk/provider': 2.0.0
       '@standard-schema/spec': 1.0.0
@@ -6153,20 +6138,10 @@ snapshots:
     dependencies:
       json-schema: 0.4.0
 
-  '@ai-sdk/vue@2.0.10(vue@3.5.18(typescript@5.9.2))(zod@3.25.76)':
+  '@ai-sdk/vue@2.0.14(vue@3.5.18(typescript@5.9.2))(zod@3.25.76)':
     dependencies:
-      '@ai-sdk/provider-utils': 3.0.1(zod@3.25.76)
-      ai: 5.0.10(zod@3.25.76)
-      swrv: 1.1.0(vue@3.5.18(typescript@5.9.2))
-    optionalDependencies:
-      vue: 3.5.18(typescript@5.9.2)
-    transitivePeerDependencies:
-      - zod
-
-  '@ai-sdk/vue@2.0.9(vue@3.5.18(typescript@5.9.2))(zod@3.25.76)':
-    dependencies:
-      '@ai-sdk/provider-utils': 3.0.1(zod@3.25.76)
-      ai: 5.0.9(zod@3.25.76)
+      '@ai-sdk/provider-utils': 3.0.3(zod@3.25.76)
+      ai: 5.0.14(zod@3.25.76)
       swrv: 1.1.0(vue@3.5.18(typescript@5.9.2))
     optionalDependencies:
       vue: 3.5.18(typescript@5.9.2)
@@ -7305,7 +7280,7 @@ snapshots:
 
   '@nuxt/ui@https://pkg.pr.new/@nuxt/ui@de4c8a9(@babel/parser@7.28.0)(@netlify/blobs@9.1.2)(change-case@5.4.4)(db0@0.3.2(drizzle-orm@0.44.4(@opentelemetry/api@1.9.0)(pg@8.16.3)))(embla-carousel@8.6.0)(ioredis@5.7.0)(jwt-decode@4.0.0)(magicast@0.3.5)(typescript@5.9.2)(vite@7.1.1(@types/node@22.17.1)(jiti@2.5.1)(lightningcss@1.30.1)(terser@5.43.1)(yaml@2.8.1))(vue-router@4.5.1(vue@3.5.18(typescript@5.9.2)))(vue@3.5.18(typescript@5.9.2))(zod@3.25.76)':
     dependencies:
-      '@ai-sdk/vue': 2.0.10(vue@3.5.18(typescript@5.9.2))(zod@3.25.76)
+      '@ai-sdk/vue': 2.0.14(vue@3.5.18(typescript@5.9.2))(zod@3.25.76)
       '@iconify/vue': 5.0.0(vue@3.5.18(typescript@5.9.2))
       '@internationalized/date': 3.8.2
       '@internationalized/number': 3.6.4
@@ -8553,19 +8528,11 @@ snapshots:
 
   agent-base@7.1.4: {}
 
-  ai@5.0.10(zod@3.25.76):
+  ai@5.0.14(zod@3.25.76):
     dependencies:
-      '@ai-sdk/gateway': 1.0.4(zod@3.25.76)
+      '@ai-sdk/gateway': 1.0.6(zod@3.25.76)
       '@ai-sdk/provider': 2.0.0
-      '@ai-sdk/provider-utils': 3.0.1(zod@3.25.76)
-      '@opentelemetry/api': 1.9.0
-      zod: 3.25.76
-
-  ai@5.0.9(zod@3.25.76):
-    dependencies:
-      '@ai-sdk/gateway': 1.0.4(zod@3.25.76)
-      '@ai-sdk/provider': 2.0.0
-      '@ai-sdk/provider-utils': 3.0.1(zod@3.25.76)
+      '@ai-sdk/provider-utils': 3.0.3(zod@3.25.76)
       '@opentelemetry/api': 1.9.0
       zod: 3.25.76
 
