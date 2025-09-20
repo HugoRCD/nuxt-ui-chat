@@ -44,7 +44,7 @@
     "vue-tsc": "^3.0.7"
   },
   "resolutions": {
-    "unimport": "4.2.0"
+    "unimport": "5.3.0"
   },
   "packageManager": "pnpm@10.17.0"
 }
