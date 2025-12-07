@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.11.0",
-    "@types/node": "^22.19.1",
+    "@types/node": "^24.10.1",
     "drizzle-kit": "^0.31.8",
     "eslint": "^9.39.1",
     "typescript": "^5.9.3",
