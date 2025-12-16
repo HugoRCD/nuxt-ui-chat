@@ -15,8 +15,8 @@ importers:
         specifier: ^2.0.21
         version: 2.0.21(zod@3.25.76)
       '@ai-sdk/vue':
-        specifier: ^2.0.113
-        version: 2.0.113(vue@3.5.25(typescript@5.9.3))(zod@3.25.76)
+        specifier: ^2.0.114
+        version: 2.0.114(vue@3.5.25(typescript@5.9.3))(zod@3.25.76)
       '@iconify-json/logos':
         specifier: ^1.2.10
         version: 1.2.10
@@ -36,8 +36,8 @@ importers:
         specifier: ^1.6.1
         version: 1.6.1(vue-router@4.6.3(vue@3.5.25(typescript@5.9.3)))(vue@3.5.25(typescript@5.9.3))
       ai:
-        specifier: ^5.0.113
-        version: 5.0.113(zod@3.25.76)
+        specifier: ^5.0.114
+        version: 5.0.114(zod@3.25.76)
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
@@ -109,8 +109,8 @@ packages:
     resolution: {integrity: sha512-6o7Y2SeO9vFKB8lArHXehNuusnpddKPk7xqL7T2/b+OvXMRIXUO1rR4wcv1hAFUAT9avGZshty3Wlua/XA7TvA==}
     engines: {node: '>=18'}
 
-  '@ai-sdk/vue@2.0.113':
-    resolution: {integrity: sha512-MM9ZSCCI2owHle4FiXXR1XQURMDarxkU31D0wjPi6wf5HNiPQMFphb4gJaEIqmJlXnFY+i/q713tMbXteGoOng==}
+  '@ai-sdk/vue@2.0.114':
+    resolution: {integrity: sha512-07KhOxWxUNQEw58AimHjDbiLl4Xf96XBVjmREh3YBviy7lU8ej6z0lyAdiFpQFnUUbuFk12sEBiuGe313U/j2g==}
     engines: {node: '>=18'}
     peerDependencies:
       vue: ^3.3.4
@@ -2541,8 +2541,8 @@ packages:
     resolution: {integrity: sha512-MnA+YT8fwfJPgBx3m60MNqakm30XOkyIoH1y6huTQvC0PwZG7ki8NacLBcrPbNoo8vEZy7Jpuk7+jMO+CUovTQ==}
     engines: {node: '>= 14'}
 
-  ai@5.0.113:
-    resolution: {integrity: sha512-26vivpSO/mzZj0k1Si2IpsFspp26ttQICHRySQiMrtWcRd5mnJMX2a8sG28vmZ38C+JUn1cWmfZrsLMxkSMw9g==}
+  ai@5.0.114:
+    resolution: {integrity: sha512-q/lxcJA6avYn/TXTaE41VX6p9lN245mDU9bIGuPpfk6WxDMvmMoUKUIS0/aXAPYN3UmkUn/r9rvq/8C98RoCWw==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.25.76 || ^4.1.8
@@ -6200,10 +6200,10 @@ snapshots:
     dependencies:
       json-schema: 0.4.0
 
-  '@ai-sdk/vue@2.0.113(vue@3.5.25(typescript@5.9.3))(zod@3.25.76)':
+  '@ai-sdk/vue@2.0.114(vue@3.5.25(typescript@5.9.3))(zod@3.25.76)':
     dependencies:
       '@ai-sdk/provider-utils': 3.0.19(zod@3.25.76)
-      ai: 5.0.113(zod@3.25.76)
+      ai: 5.0.114(zod@3.25.76)
       swrv: 1.1.0(vue@3.5.25(typescript@5.9.3))
     optionalDependencies:
       vue: 3.5.25(typescript@5.9.3)
@@ -8842,7 +8842,7 @@ snapshots:
 
   agent-base@7.1.4: {}
 
-  ai@5.0.113(zod@3.25.76):
+  ai@5.0.114(zod@3.25.76):
     dependencies:
       '@ai-sdk/gateway': 2.0.21(zod@3.25.76)
       '@ai-sdk/provider': 2.0.0
