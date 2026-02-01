@@ -32,7 +32,7 @@
     "motion-v": "^1.10.2",
     "nuxt": "^4.3.0",
     "nuxt-auth-utils": "^0.5.28",
-    "pg": "^8.17.2",
+    "pg": "^8.18.0",
     "shiki-stream": "^0.1.4"
   },
   "devDependencies": {
