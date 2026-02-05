@@ -12,11 +12,11 @@ importers:
   .:
     dependencies:
       '@ai-sdk/gateway':
-        specifier: ^2.0.31
-        version: 2.0.31(zod@3.25.76)
+        specifier: ^2.0.32
+        version: 2.0.32(zod@3.25.76)
       '@ai-sdk/vue':
-        specifier: ^2.0.125
-        version: 2.0.125(vue@3.5.27(typescript@5.9.3))(zod@3.25.76)
+        specifier: ^2.0.126
+        version: 2.0.126(vue@3.5.27(typescript@5.9.3))(zod@3.25.76)
       '@iconify-json/logos':
         specifier: ^1.2.10
         version: 1.2.10
@@ -36,8 +36,8 @@ importers:
         specifier: ^1.6.1
         version: 1.6.1(vue-router@4.6.4(vue@3.5.27(typescript@5.9.3)))(vue@3.5.27(typescript@5.9.3))
       ai:
-        specifier: ^5.0.125
-        version: 5.0.125(zod@3.25.76)
+        specifier: ^5.0.126
+        version: 5.0.126(zod@3.25.76)
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
@@ -93,8 +93,8 @@ packages:
       bcrypt:
         optional: true
 
-  '@ai-sdk/gateway@2.0.31':
-    resolution: {integrity: sha512-HcglYbIFqKhUYqK5qSNc2RwYxVyuhADy2R/8HMSTaUqHVFfUIFyCyDHeuNBxJcSDtHVMebPdn6Bxa0YogeiwcA==}
+  '@ai-sdk/gateway@2.0.32':
+    resolution: {integrity: sha512-FT24EjSPOm+esohJO1KGFMfcKQJS2cbxSEL6GlAojlcty5CAmzpDCTU2AQb8lK2szKwGOKAnMhtBnWk/QWajPQ==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.25.76 || ^4.1.8
@@ -109,8 +109,8 @@ packages:
     resolution: {integrity: sha512-KCUwswvsC5VsW2PWFqF8eJgSCu5Ysj7m1TxiHTVA6g7k360bk0RNQENT8KTMAYEs+8fWPD3Uu4dEmzGHc+jGng==}
     engines: {node: '>=18'}
 
-  '@ai-sdk/vue@2.0.125':
-    resolution: {integrity: sha512-oJMw7QIKw0tcHYu2D2zaIIIJSK+wXDcoUUzscdMRrslkeSdOXY7O2dAQpNgSK+s2R08NL5OXnxKrecBc/EC/8Q==}
+  '@ai-sdk/vue@2.0.126':
+    resolution: {integrity: sha512-UxguXLcEvjgk0YQOa1e5yJpMIV7Gh3bE+ttu6h4+l37dC7lX1o9jgOPsimLj4M4SRXk+b/lOOqCXAnfU8I3Jmw==}
     engines: {node: '>=18'}
     peerDependencies:
       vue: ^3.3.4
@@ -3045,8 +3045,8 @@ packages:
     resolution: {integrity: sha512-MnA+YT8fwfJPgBx3m60MNqakm30XOkyIoH1y6huTQvC0PwZG7ki8NacLBcrPbNoo8vEZy7Jpuk7+jMO+CUovTQ==}
     engines: {node: '>= 14'}
 
-  ai@5.0.125:
-    resolution: {integrity: sha512-M4gVfuxOP7eywi9zKbonVKGYMYV2IMuj9jki5/7FpogzNq+P9u7/ZvBivt4iu5A3z/V5BJojZ8vdBsEqbGnsHA==}
+  ai@5.0.126:
+    resolution: {integrity: sha512-eXR9ZuyojCGLf1JNj3iwyrABTEjX9pJd/SQ0OOLzcotrXoTjQ/2CJ5JwcUbRu0jzWlKCsXDH4kv57D1jOAQR8w==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.25.76 || ^4.1.8
@@ -4221,6 +4221,7 @@ packages:
 
   glob@10.4.5:
     resolution: {integrity: sha512-7Bv8RF0k6xjo7d4A/PxYLbUCfb6c+Vpd2/mB2yRDlew7Jb5hEXiCD9ibfO7wpk8i4sevK6DFny9h7EYbM3/sHg==}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     hasBin: true
 
   glob@13.0.0:
@@ -6149,7 +6150,7 @@ packages:
   tar@7.5.1:
     resolution: {integrity: sha512-nlGpxf+hv0v7GkWBK2V9spgactGOp0qvfWRxUMjqHyzrt3SgwE48DIv/FhqPHJYLHpgW1opq3nERbz5Anq7n1g==}
     engines: {node: '>=18'}
-    deprecated: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exhorbitant rates) by contacting i@izs.me
+    deprecated: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   terser@5.43.1:
     resolution: {integrity: sha512-+6erLbBm0+LROX2sPXlUYx/ux5PyE9K/a92Wrt6oA+WDAoFTdpHE5tCYCI5PNzq2y8df4rA+QgHLJuR4jNymsg==}
@@ -6839,7 +6840,7 @@ snapshots:
       '@phc/format': 1.0.0
       '@poppinss/utils': 6.10.0
 
-  '@ai-sdk/gateway@2.0.31(zod@3.25.76)':
+  '@ai-sdk/gateway@2.0.32(zod@3.25.76)':
     dependencies:
       '@ai-sdk/provider': 2.0.1
       '@ai-sdk/provider-utils': 3.0.20(zod@3.25.76)
@@ -6857,10 +6858,10 @@ snapshots:
     dependencies:
       json-schema: 0.4.0
 
-  '@ai-sdk/vue@2.0.125(vue@3.5.27(typescript@5.9.3))(zod@3.25.76)':
+  '@ai-sdk/vue@2.0.126(vue@3.5.27(typescript@5.9.3))(zod@3.25.76)':
     dependencies:
       '@ai-sdk/provider-utils': 3.0.20(zod@3.25.76)
-      ai: 5.0.125(zod@3.25.76)
+      ai: 5.0.126(zod@3.25.76)
       swrv: 1.1.0(vue@3.5.27(typescript@5.9.3))
     optionalDependencies:
       vue: 3.5.27(typescript@5.9.3)
@@ -9824,9 +9825,9 @@ snapshots:
 
   agent-base@7.1.4: {}
 
-  ai@5.0.125(zod@3.25.76):
+  ai@5.0.126(zod@3.25.76):
     dependencies:
-      '@ai-sdk/gateway': 2.0.31(zod@3.25.76)
+      '@ai-sdk/gateway': 2.0.32(zod@3.25.76)
       '@ai-sdk/provider': 2.0.1
       '@ai-sdk/provider-utils': 3.0.20(zod@3.25.76)
       '@opentelemetry/api': 1.9.0
