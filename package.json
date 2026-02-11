@@ -21,7 +21,7 @@
     "@ai-sdk/gateway": "^2.0.35",
     "@ai-sdk/vue": "^2.0.129",
     "@iconify-json/logos": "^1.2.10",
-    "@iconify-json/lucide": "^1.2.89",
+    "@iconify-json/lucide": "^1.2.90",
     "@iconify-json/simple-icons": "^1.2.70",
     "@nuxt/ui": "^4.4.0",
     "@nuxtjs/mdc": "^0.20.1",
@@ -36,8 +36,8 @@
     "shiki-stream": "^0.1.4"
   },
   "devDependencies": {
-    "@nuxt/eslint": "^1.15.0",
-    "@types/node": "^24.10.12",
+    "@nuxt/eslint": "^1.15.1",
+    "@types/node": "^24.10.13",
     "drizzle-kit": "^0.31.9",
     "eslint": "^9.39.2",
     "typescript": "^5.9.3",
