@@ -21,7 +21,7 @@
     "@ai-sdk/gateway": "^2.0.43",
     "@ai-sdk/vue": "^2.0.137",
     "@iconify-json/logos": "^1.2.10",
-    "@iconify-json/lucide": "^1.2.92",
+    "@iconify-json/lucide": "^1.2.93",
     "@iconify-json/simple-icons": "^1.2.71",
     "@nuxt/ui": "^4.4.0",
     "@nuxtjs/mdc": "^0.20.1",
@@ -46,5 +46,5 @@
   "resolutions": {
     "unimport": "5.6.0"
   },
-  "packageManager": "pnpm@10.30.1"
+  "packageManager": "pnpm@10.30.2"
 }
