@@ -18,15 +18,15 @@
     "db:push": "drizzle-kit push"
   },
   "dependencies": {
-    "@ai-sdk/gateway": "^2.0.55",
-    "@ai-sdk/vue": "^2.0.150",
+    "@ai-sdk/gateway": "^2.0.56",
+    "@ai-sdk/vue": "^2.0.151",
     "@iconify-json/logos": "^1.2.10",
     "@iconify-json/lucide": "^1.2.96",
-    "@iconify-json/simple-icons": "^1.2.72",
+    "@iconify-json/simple-icons": "^1.2.73",
     "@nuxt/ui": "^4.5.1",
     "@nuxtjs/mdc": "^0.20.2",
     "@vercel/analytics": "^1.6.1",
-    "ai": "^5.0.150",
+    "ai": "^5.0.151",
     "date-fns": "^4.1.0",
     "drizzle-orm": "^0.45.1",
     "motion-v": "^1.10.3",
@@ -46,5 +46,5 @@
   "resolutions": {
     "unimport": "5.7.0"
   },
-  "packageManager": "pnpm@10.31.0"
+  "packageManager": "pnpm@10.32.0"
 }
