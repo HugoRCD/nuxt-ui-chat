@@ -18,15 +18,15 @@
     "db:push": "drizzle-kit push"
   },
   "dependencies": {
-    "@ai-sdk/gateway": "^2.0.77",
-    "@ai-sdk/vue": "^2.0.173",
+    "@ai-sdk/gateway": "^2.0.82",
+    "@ai-sdk/vue": "^2.0.179",
     "@iconify-json/logos": "^1.2.11",
     "@iconify-json/lucide": "^1.2.102",
     "@iconify-json/simple-icons": "^1.2.78",
     "@nuxt/ui": "^4.6.1",
     "@nuxtjs/mdc": "^0.21.1",
     "@vercel/analytics": "^1.6.1",
-    "ai": "^5.0.173",
+    "ai": "^5.0.179",
     "date-fns": "^4.1.0",
     "drizzle-orm": "^0.45.2",
     "motion-v": "^1.10.3",
