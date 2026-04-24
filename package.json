@@ -21,9 +21,9 @@
     "@ai-sdk/gateway": "^2.0.82",
     "@ai-sdk/vue": "^2.0.179",
     "@iconify-json/logos": "^1.2.11",
-    "@iconify-json/lucide": "^1.2.102",
-    "@iconify-json/simple-icons": "^1.2.78",
-    "@nuxt/ui": "^4.6.1",
+    "@iconify-json/lucide": "^1.2.103",
+    "@iconify-json/simple-icons": "^1.2.79",
+    "@nuxt/ui": "^4.7.0",
     "@nuxtjs/mdc": "^0.21.1",
     "@vercel/analytics": "^1.6.1",
     "ai": "^5.0.179",
@@ -41,10 +41,10 @@
     "drizzle-kit": "^0.31.10",
     "eslint": "^9.39.4",
     "typescript": "^5.9.3",
-    "vue-tsc": "^3.2.6"
+    "vue-tsc": "^3.2.7"
   },
   "resolutions": {
     "unimport": "5.7.0"
   },
-  "packageManager": "pnpm@10.33.0"
+  "packageManager": "pnpm@10.33.2"
 }
