@@ -1,0 +1,8 @@
+shamefullyHoist: true
+
+allowBuilds:
+  '@parcel/watcher': false
+  esbuild: false
+  unrs-resolver: false
+  vue-demi: false
+  better-sqlite3: false
