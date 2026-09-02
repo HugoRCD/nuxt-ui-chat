@@ -143,6 +143,18 @@ TODO:
 - [ ] Add image to message
 - [ ] Change model during conversation
 
+<!-- automd:fetch url="gh:hugorcd/markdown/main/src/sponsors.md" -->
+
+## Sponsors
+
+<p align="center">
+  <a href="https://github.com/sponsors/HugoRCD">
+    <img src='https://cdn.jsdelivr.net/gh/hugorcd/static/sponsors.svg' alt="HugoRCD sponsors" />
+  </a>
+</p>
+
+<!-- /automd -->
+
 ## License
 
 This project requires a [Nuxt UI Pro license](https://ui.nuxt.com/pro) for production use.
