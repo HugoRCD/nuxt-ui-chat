@@ -24,7 +24,7 @@
     "@iconify-json/lucide": "^1.2.104",
     "@iconify-json/simple-icons": "^1.2.80",
     "@nuxt/ui": "^4.7.0",
-    "@nuxtjs/mdc": "^0.21.1",
+    "@nuxtjs/mdc": "^0.22.2",
     "@vercel/analytics": "^1.6.1",
     "ai": "^5.0.179",
     "date-fns": "^4.1.0",
